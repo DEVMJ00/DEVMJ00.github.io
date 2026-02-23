@@ -36,7 +36,51 @@ header {
   background-color : darkseagreen; 
 }
 
+/* Conteneur du menu déroulant */
+.deroulant {
+    position: relative;
+    display: inline-block;
+}
 
+/* Bouton du menu */
+.bouton_deroulant {
+    background-color: transparent;
+    border: none;
+    color: var(--color-font-nav);
+    font-size: 16px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+/* Contenu du menu (caché par défaut) */
+.contenu_deroulant {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 150px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 20;
+    border-radius: 5px;
+}
+
+/* Style des liens dans le menu */
+.contenu_deroulant a {
+    color: black;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+}
+
+/* Affichage du menu au survol */
+.deroulant:hover .contenu_deroulant {
+    display: block;
+
+}
+
+/* Effet au survol des liens */
+.contenu_deroulant a:hover {
+    background-color: #ddd;
+}
 
 a {
 	text-decoration : none ; 
@@ -255,7 +299,25 @@ section
 
 <body>
  <header>
- <h1>Hello</h1>
+       <div class="deroulant">
+                <button class="bouton_deroulant">Menu1</button>
+                <div class="contenu_deroulant">
+                    <a href=""
+                       title="Personnes">Page 1</a>
+                    <a href=""
+                       title="Personnes">Page 2</a>
+                </div>
+            </div>
+
+            <div class="deroulant">
+                <button class="bouton_deroulant">Menu2</button>
+                <div class="contenu_deroulant">
+                    <a href=""
+                       title="Gérer">Page 1</a>
+                    <a href=""
+                       title="Créer">Page 2</a>
+                </div>
+            </div>
  </header>  
 
 <content>
@@ -489,6 +551,7 @@ section
 </script>
 
 </body>
+
 
 
 
