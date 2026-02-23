@@ -21,7 +21,8 @@ body {
     position: fixed;
     width: 100%;
     top: 0;
-    background: white;
+    background: #1D809F;
+    color : white;
     display: flex;
     justify-content: space-between;
     padding: 1rem 2rem;
