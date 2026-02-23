@@ -17,6 +17,16 @@ body {
     color: var(--text);
 }
 
+.profile-picture {
+    max-width: 200px;
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+}
+
 .navbar {
     position: fixed;
     width: 100%;
