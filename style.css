@@ -1,5 +1,6 @@
 :root {
     --primary: #0f172a;
+    --secondary : #1D809F; 
     --accent: #2563eb;
     --bg: #f8fafc;
     --text: #1e293b;
@@ -18,10 +19,10 @@ body {
 }
 
 .profile-picture {
-    max-width: 200px;
+    max-width: 100px;
     width: 100%;
     height: auto;
-    border-radius: 50%;
+    border-radius: 30%;
     object-fit: cover;
     margin-bottom: 1.5rem;
     box-shadow: 0 6px 20px rgba(0,0,0,0.15);
@@ -31,7 +32,7 @@ body {
     position: fixed;
     width: 100%;
     top: 0;
-    background: #1D809F;
+    background: var(--secondary);
     color : white;
     display: flex;
     justify-content: space-between;
@@ -100,7 +101,9 @@ body {
 
 footer {
     text-align: center;
+    position: fixed;
+    color: white; 
     padding: 2rem;
-    background: white;
+    background: var(--secondary);
     margin-top: 2rem;
 }
