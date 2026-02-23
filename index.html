@@ -1,0 +1,496 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head> 
+  <meta charset="UTF8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accueil</title>
+</head>
+
+<!--  bleu : #023F6F  -  rouge : #E80249 -->
+
+<style>
+/* -------------------------------------------------
+   Reset minimal
+   ------------------------------------------------- */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+	#display : flex ; 
+	font-family: "Antonio", sans-serif;
+	#flex-direction : column ; 
+	align-items : center ; 
+	background-color : ghostwhite; 
+	height : 90vh;
+	overflow: auto; 
+}
+
+header {
+  height :auto;
+  background-color : darkseagreen; 
+}
+
+
+
+a {
+	text-decoration : none ; 
+	color : ghostwhite ; 
+}
+
+.card {
+	display : flex ; 
+	padding : 1% ;
+	flex-wrap : wrap ; 
+	min-width : 130px ;
+        /* max-width : 150px; */
+	width : 150px ;
+	height : 100px;
+	min-height : 100px;
+	background-color : #E80249 ;
+	border : 2px solid #023F6F;
+	border-radius : 20px ; 
+	box-shadow : 2px 2px 5px 2px rgba(0, 0, 0, 0.4) ;
+	justify-content : center ; 
+	align-items : center ; 
+	text-align : center ; 
+	margin-bottom : 15px ;
+	font-weight : bold ; 
+}
+
+.card:hover {
+	cursor : pointer ; 
+	background-color : #CC0240 ;
+	transform : scale(1.1) ;
+	transition : transform 99ms ;
+}
+
+footer {
+	display : flex ;
+	position : fixed ;
+	left : 0;
+	bottom : 0 ; 
+	color : ghostwhite ; 
+	background-color : darkblue; 
+	width : 100% ; 
+	height : 40px; 
+	justify-content : center ;
+	align-items : center; 
+}
+
+content {
+	display : flex ; 
+	flex-direction : row ; 
+	width : 100%;
+	/* overflow-y: auto; */
+}
+
+
+ /* ---------- Sidebar (menu) ---------- */
+.sidebar {
+	position: sticky;  /* reste visible pendant le scroll */
+	flex: 0 0 12%;   
+	top: 0;
+	left: 0;
+	min-width : 130px;
+	/*
+    max-width : 250px;
+    width : 5%; 
+  */
+	height: 100vh;
+	background: lightgrey;
+	padding: 1rem;
+	/* box-sizing: border-box; */
+	overflow-y: auto;
+	}
+    
+.sidebar h1 {
+	text-align : center ; 
+	color : #023F6F ;
+}
+.sidebar h2 {
+	margin-top: 0;
+	color : #023F6F; 
+}
+
+.sidebar h3 {
+	color : green;
+}
+.sidebar ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.sidebar li {
+	margin: 0.5rem 0;
+	font-size : 0.9em ;
+}
+
+/*
+.sidebar a {
+	text-decoration: none;
+	color: #333;
+	font-weight: 500;
+}
+
+.sidebar a:hover {
+	color: #0066cc;
+}
+*/
+
+
+section 
+{
+	display : flex ; 
+	flex: 1; 
+	flex-direction : row ; 
+	align-items : center ; 
+	align-content : flex-start ;
+	justify-content: flex-start ; 
+	padding : 15px;             
+	right: 0;
+	flex-wrap : wrap;
+	gap : 30px ; 
+	width : 70%;
+	max-width: calc(100% - 150px); /* garantit qu’on ne dépasse pas le sidebar */
+	height : 95vh; 
+	overflow-y: auto;
+}
+ 	
+
+/* -------------------------------------------------
+   1️⃣ Tablette (portrait) – largeur ≤ 1024 px
+   ------------------------------------------------- */
+@media (max-width: 1024px) {
+    .card {
+        height : 150px ; 
+	flex: 0 0 30%;      /* 3 cartes par ligne */
+	
+    }
+
+/* Masque la barre sur les navigateurs WebKit (Chrome, Edge, Safari) */
+         .sidebar::-webkit-scrollbar {
+                  width: 0;               /* largeur de la barre */
+                  background: transparent;/* évite un petit espace gris */
+}
+/* Firefox – utilise la propriété propriétaire */
+.sidebar {
+    scrollbar-width: none;  /* «none » masque la barre */
+}
+
+/* Optionnel : garder la possibilité de faire défiler avec la molette ou le toucher */
+.sidebar {
+    -ms-overflow-style: none;   /* IE/Edge legacy */
+}
+
+}
+
+/* -------------------------------------------------
+   2️⃣ Mobile – largeur ≤ 768 px
+   ------------------------------------------------- */
+@media (max-width: 768px) {
+  
+    .card {
+        min-width : 110px ;
+	width : 130px;
+	height : 130px;
+        font-size : 0.8em ;  
+   }
+
+   .card img {
+       width : 80%;
+   }
+   
+   .sidebar {
+	/*position: sticky;          */    /* reste visible pendant le scroll */
+	flex: 0 0 12%;   
+	top: 0;
+	left: 0;
+	min-width : 120px;
+	max-width : 200px;
+	width : 10%; 
+	height: 100vh;
+	background: lightgrey;
+	padding: 1rem;
+	/* box-sizing: border-box; */
+	overflow-y: auto;
+	}
+   
+   .sidebar h2
+   {
+       font-size : 0.8em; 
+   }
+
+   .sidebar li {
+	margin: 0.5rem 0;
+	font-size : 0.7em ;
+   }
+
+/* Masque la barre sur les navigateurs WebKit (Chrome, Edge, Safari) */
+         .sidebar::-webkit-scrollbar {
+                  width: 0;               /* largeur de la barre */
+                  background: transparent;/* évite un petit espace gris */
+       }
+/* Firefox – utilise la propriété propriétaire */
+.sidebar {
+    scrollbar-width: none;  /* «none » masque la barre */
+}
+
+/* Optionnel : garder la possibilité de faire défiler avec la molette ou le toucher */
+.sidebar {
+    -ms-overflow-style: none;   /* IE/Edge legacy */
+}
+}
+
+
+
+
+</style>
+
+<body>
+ <header>
+ <h1>Hello</h1>
+ </header>  
+
+<content>
+	<aside class="sidebar">
+    	<h2>✅n°tiers</h2>
+  		<ul>
+			<!-- <li><a href="#accueil">Accueil</a></li> --> 
+			<li><strong> Cécile : </strong> <em> CVA </em><br> 20277596 </li>
+			<li><strong> Mario  : </strong> <em> MJO </em><br> 20277439 </li>
+			<li><strong> Emeline : </strong> <em> EVA </em><br> 20232457 </li>
+			<li><strong> Linda : </strong> <em>  </em><br> 20244502 </li>
+			<li><strong> Fiona : </strong> <em> FPC </em><br> 20261812 </li>
+			<li><strong> Jérôme : </strong> <em> JCH </em><br> 20262426 </li>
+			<li><strong> Nadine : </strong> <em> NAN </em><br> 19900276 </li>
+
+  		</ul> 
+	</aside>
+
+	<section>
+  		<!-- GOOGLE --> 
+		<div>
+			<a href="https://www.google.com/" target="_blank" rel="noopener noreferrer">
+				<div class="card" style="color : black ; background-color : #FFFFFF ;" title="Ouvrir une page Google">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1200px-Google_2015_logo.svg.png" alt="Google" style="max-width:100px;">
+				</div>
+			</a>
+		</div>
+	
+	
+		<!-- ULIS --> 
+		<div>
+			<a href="http://srvuweb-p1//ULISNGE/index.do?clientHostName=%clientname%" target="_blank" rel="noopener noreferrer"><div class="card" style="background-color : #8FA7C8 ;" title="Démarrer avec Ulis" > Ulis </div></a>
+		</div>
+	
+	<!-- SDH --> 
+		<div>
+			<a href="https://www.sdh.fr/accueil" title="Se rendre sur la page de la SDH" style="text-decoration:none;">
+				<div class="card" style="background-color:white; text-align:center;">
+		  			<img src="https://www.sdh.fr/o/prod-theme-18-03-2024/images/logo_normal.png" alt="SDH" style="max-width:100px;">  
+				</div>
+			</a>
+		</div>
+	
+
+
+		<!-- UTILES - L'intranet --> 
+		<div>
+			<a href="https://utiles-intranet.actionlogement.fr/jcms/j_6/accueil-action-logement" target="_blank" rel="noopener noreferrer"><div class="card" style="background-color : white ;" title="Consulter la page Utile" > <img src="https://utiles-intranet.actionlogement.fr/plugins/ActionLogementPlugin/images/svg/AL-Logo_Utiles.svg" alt="Google" style="max-width:100px;">
+				</div>
+</a>
+		</div>
+	
+
+
+
+		<!-- TRAVAUX --> 
+		<div>
+			<a href="http://globalsdh/intranet/index.php?option=com_user&view=login&return=aHR0cDovL2dsb2JhbHNkaC9pbnRyYW5ldC9pbmRleC5waHA/b3B0aW9uPWNvbV90YWNoZSZ2aWV3PXRhY2hlJkl0ZW1pZD0x" target="_blank" rel="noopener noreferrer"><div class="card" style="background-color : #FFBC01 ;" title="Accéder à la plate-forme Travaux"> Travaux </div></a>
+		</div>
+	
+		<!-- SHAREPOINT --> 
+		<div>
+			<a href="https://sdh38.sharepoint.com/" target="_blank" rel="noopener noreferrer">
+				<div class="card" style="background-color : #32B7C0 ;" title="Accéder au Sharepoint de la SDH">
+					<img src="https://sdh38.sharepoint.com/_layouts/15/images/favicon.ico?rev=43" alt="Sharepoint" style="max-width : 100px ; padding : 10px ;">Sharepoint 
+				</div>
+			</a>
+		</div>
+	  
+	
+		<!-- E-Temptation -->    
+		<div>
+			<a href="http://srvhoroquartz:8080/webquartz/eQuartz/auth.do?redirect=../eQuartz/home.HQ&deconnect=true" target="_blank" rel="noopener noreferrer"><div class="card" style="background-color : #D8EEAB; color:black;" title="Accéder à e-temptation"> e-Temptation </div></a>
+		</div>
+	   
+	
+		<!-- GOOGLE MAPS --> 
+		<div>
+			<a href="https://www.google.com/maps" target="_blank" rel="noopener noreferrer" >
+				<div class="card" style="background-color: white; color: black" title="Accéder à GoogleMaps">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Google_Maps_Logo_2020.svg/2275px-Google_Maps_Logo_2020.svg.png" alt="Google" style="max-width:100px;">
+				</div>
+			</a>
+		</div>
+	
+	
+		<!-- GLOBAL --> 
+		<div>
+			<a href="https://sdh38.sharepoint.com/:x:/r/sites/contrats/_layouts/15/Doc.aspx?sourcedoc=%7B509EFE42-FEB6-487E-A85F-B5C6C9107D9E%7D&file=GLOBAL.xlsx&action=default&mobileredirect=true" target="_blank" rel="noopener noreferrer"><div class="card" title="Ouvrir le fichier Global.xls"> Global </div> </a>
+		</div>
+	  
+	
+	
+		<!-- NLEAD --> 
+		<div>
+			<a href="https://lead.novamap.fr/Logon.html" target="_blank" rel="noopener noreferrer" >
+				<div class="card" style="background-color: white; color: black" title="Accéder à NLead">
+					<img src="https://lead.novamap.fr/NLead/Application/img/favicon.ico" alt="NLead" style="max-width:100px; height : auto ;"> N'Lead
+				</div>
+			</a>
+		</div>
+	
+	
+		<!-- BPU FOURNISSEURS --> 
+		<div>
+			<a href="https://sdh38.sharepoint.com/sites/coordination/Contrats%20cadres/Forms/AllItems.aspx?id=%2Fsites%2Fcoordination%2FContrats%20cadres%2FContrats%20Cadres%20Documents%20utilisateurs%2001%2004%202024%2FBPU%20CCTP%20UTILISATEURS%20SDH&viewid=c0a34562%2Da42f%2D4c1d%2Db7f9%2D2b9f43f0b4b4&csf=1&web=1&e=fppwPn&CID=4b748ab4%2D9c26%2D47b3%2D93e7%2D63bd89ae9bfc&FolderCTID=0x012000C0CA5AEB430E444C98773A76CD23D362" target="_blank" rel="noopener noreferrer"><div class="card" title="Ouvrir les BPU"> BPU Fournisseurs</div> </a>
+		</div>
+	
+	
+	
+		<!-- SYNDICS --> 
+		<div>
+			<a href="https://sdh38.sharepoint.com/:x:/r/sites/dtps-p/Partage/PROXIMIT%C3%89/TER%2005%20-%20Sud%20et%20Est/PATRIMOINE%20TSE/GESTION%20SYNDIC/Coordonn%C3%A9es%20syndics.xlsx?d=w564c66ccb73a5b92b030b81d4233f029&csf=1&web=1&e=CpN0zS" target="_blank" rel="noopener noreferrer"><div class="card" title="Ouvrir le tableau coordonnées des syndics"> Syndics</div> </a>
+		</div>
+	
+	
+	
+		<!-- MOKA.CARE --> 
+		<div>
+			<a href="https://member.moka.care/users/sign_in" target="_blank" rel="noopener noreferrer" title="Ouvrir la page Moka.Care">
+				<div class="card" style="background-color: white; color: black" >
+					<img src="https://member.moka.care/assets/moka-care-logo-166x40-65ba8d927c11c971dc412931bf18266c7afb45d88df85abef12a6f43768f564c.svg" alt="MokaCare" style="max-width:100px;">  
+				</div>
+			</a>
+		</div>
+	
+		<!-- EPSENS --> 
+		<div>
+			<a href="https://www.epsens.com/" title="Ouvrir la page Epsens" target="_blank" rel="noopener noreferrer" >
+				<div class="card" style="background-color: white; color: black" >
+					<img src="https://www.epsens.com/themes/custom/epargne_salariale/img/logo.svg" alt="Epsens" style="max-width:100px;">  
+				</div>
+			</a>
+		</div>
+	
+		<!-- ABEILLES --> 
+		<div>
+			<a href="https://sdh38.sharepoint.com/sites/collab/Dossiers%20collaboratifs/Forms/AllItems.aspx?id=%2Fsites%2Fcollab%2FDossiers%20collaboratifs%2FContrats%2F01%20Contrats%2F1%2E%20CONTRATS%20ENTRETIEN%20COURANT%2FDESINSECTISATION%20DERATISATION%20DESINFECTION%20%20GAINES%20RECEPT%20LOCAUX%20VO%2FContrat%5F2D%5F01%2D07%2D2024%5F30%2D06%2D2028%2FLOT%2001%20PRODHYG&viewid=69fb6774%2Db1b8%2D4501%2D88e7%2De67838792ee4&FolderCTID=0x01200038919A1790571C4EA8BCA6A5AD4B221E" target="_blank" rel="noopener noreferrer" title="Ouvrir la page des BPU guêpes/abeilles/frelons etc...">
+				<div class="card" style="background-color: white; color: black" alt="Sharepoint sur les abeilles">🐝  BPU Insectes
+				</div>
+			</a>
+		</div>
+	
+		<!-- CADASTRE --> 
+		<div>
+			<a href="https://cadastre.data.gouv.fr/" target="_blank" rel="noopener noreferrer" title="Accéder aux références cadastrales">
+				<div class="card" style="background-color: white; color: black" >
+					<img src="https://cadastre.data.gouv.fr/static/images/logos/cadastre.data.gouv.fr.svg" alt="Cadastre" style="max-width:100px;">  
+				</div>
+			</a>
+		</div>
+
+		<!-- ISERBA --> 
+		<div>
+			<a href="https://extranet.iserba.fr/login" target="_blank" rel="noopener noreferrer" title="Consulter les rapports d'intervention">
+				<div class="card" style="background-color: #00A890; color: white" >Iserba
+					<!-- <img src="http://www.w3.org/2000/svg" alt="Iserba" style="max-width:100px;">  -->
+				</div>
+			</a>
+		</div>
+  
+
+		<!-- PROTON --> 
+		<div>
+			<a href="https://account.proton.me/fr/apps" target="_blank" rel="noopener noreferrer" title="Ouvrir Proton">
+				<div class="card" style="background-color: white; color: black" >
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/37/Proton_AG_logo.svg/langfr-250px-Proton_AG_logo.svg.png" alt="Proton" style="max-width:100px;">  
+				</div>
+			</a>
+		</div>
+
+
+		<!-- GIT HUB --> 
+		<div>
+			<a href="https://github.com/login" title="Ouvrir GitHub" target="_blank" rel="noopener noreferrer">
+				<div class="card" style="background-color: white; color: black" >
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/GitHub_Invertocat_Logo.svg/250px-GitHub_Invertocat_Logo.svg.png" alt="GIT-Hub" style="max-width:50px;">  
+				</div>
+			</a>
+		</div>
+
+
+
+		<!-- GIT HUB DEV--> 
+		<div>
+			<a href="https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Fauth%2Fgithub_editor%3Fredirect%3D%252Fgithub%252Fdev%26requestId%3D231b10f1-9324-4a76-9777-98030a4b96dc" title="Ouvrir GitHub DEV" target="_blank" rel="noopener noreferrer">
+				<div class="card" style="background-color: white; color: black" >
+					<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAQlBMVEVHcEz////////////8+/739Pz6+P3////t6PfNweiyntyVd89+V8X////e1fBfLrhjNblnOrunkNefhNP///+7quD7DDsWAAAADnRSTlMAEDqEudv8Xv//////O3RE9gcAAAEwSURBVHgBfdOBjsAQDABQNgw1bWf+/1evnclOcrlmScTTwjAz7LY7H4J3+2bNGvbwMWUoADlFfyx8upoLIkkgllzd+dnhU0FiDZIPS/LHZ5nplXdEnrqp4VRiKa16qlmXxC4gfIOgiSZntWgtMvq+4wW59wxXvG9kKlUKW5+lyfcS0oHdW7NFTaQVkSU1bmZP0kJYEVTrblx+GitWkoTujG86e1gxyFTYvAlAfyNBMKH8g14zOa4YmbXsWBCmFbv2ZTe2QmVJjYU0YTfbaEH9rMI8BOsvkYal9fhIbzpaqno7Dr6Fgsj1wUJq4+CNdV3qByg5KEZ4jLuz42dfc0ETiS9/zmsiU+aeZqba70sklRHiQETun0lllxpP5FbduV5qV+u7y+qWSz2fg0wafj+HH+e2JXWO25OMAAAAAElFTkSuQmCC" alt="GIT-Hub Dev." style="max-width:80px;">  
+				</div> 
+			</a>
+		</div>
+
+
+
+		<!-- HOTMAIL--> 
+		<div>
+			<a href="https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=9199bf20-a13f-4107-85dc-02114787ef48&scope=https%3A%2F%2Foutlook.office.com%2F.default%20openid%20profile%20offline_access&redirect_uri=https%3A%2F%2Foutlook.live.com%2Fmail%2F&client-request-id=3ce5e1bb-b1ed-cb11-c162-7fed2690da3d&response_mode=fragment&client_info=1&prompt=select_account&nonce=01993dd1-189d-70fd-88da-917ae0c7d07d&state=eyJpZCI6IjAxOTkzZGQxLTE4OWMtNzU2MS1iN2FjLWM1NzhhNDYzMGE0NyIsIm1ldGEiOnsiaW50ZXJhY3Rpb25UeXBlIjoicmVkaXJlY3QifX0%3D&claims=%7B%22access_token%22%3A%7B%22xms_cc%22%3A%7B%22values%22%3A%5B%22CP1%22%5D%7D%7D%7D&x-client-SKU=msal.js.browser&x-client-VER=4.14.0&response_type=code&code_challenge=01E7jorOYCx67soSQBR27kRPryKLrMpgQDZrTjeNAtE&code_challenge_method=S256&cobrandid=ab0455a0-8d03-46b9-b18b-df2f57b9e44c&fl=dob,flname,wld" title="Ouvrir Outlook" target="_blank" rel="noopener noreferrer">
+				<div class="card" style="background-color: white; color: black" >
+					<img src="https://aadcdn.msftauth.net/shared/1.0/content/images/microsoft_logo_564db913a7fa0ca42727161c6d031bef.svg" alt="Outlook" style="max-width:90px;">  
+				</div> 
+			</a>
+		</div>
+
+	</section>
+</content>
+	
+<footer id="site-footer">
+</footer>
+
+<script>
+  // Crée un élément <p>
+  const p = document.createElement('p');
+
+  // Formate la date « jour mois année » en français
+  const options = { weekday : 'long', day: 'numeric', month: 'long', year: 'numeric' };
+  const today   = new Date();
+  const formattedDate = new Intl.DateTimeFormat('fr-FR', options).format(today);
+
+  // Ajoute le texte dans le paragraphe
+  p.textContent = `${formattedDate}`;
+
+  // Insère le paragraphe dans le footer
+  // Ici on suppose que le footer possède l’id « site-footer ».
+  const footer = document.getElementById('site-footer') || document.querySelector('footer');
+  if (footer) {
+    footer.appendChild(p);
+  } else {
+    // Si aucun footer n’est trouvé, on l’ajoute à la fin du body comme secours
+    document.body.appendChild(p);
+  }
+</script>
+
+</body>
+
+
+
+
+
