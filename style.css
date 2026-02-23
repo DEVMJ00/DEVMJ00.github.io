@@ -1,0 +1,95 @@
+:root {
+    --primary: #0f172a;
+    --accent: #2563eb;
+    --bg: #f8fafc;
+    --text: #1e293b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+}
+
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    z-index: 1000;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+}
+
+.hero {
+    height: 100vh;
+    background: var(--primary);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+}
+
+.hero button {
+    margin-top: 1rem;
+    padding: 0.7rem 1.2rem;
+    border: none;
+    background: var(--accent);
+    color: white;
+    cursor: pointer;
+}
+
+.section {
+    padding: 6rem 2rem;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.skills-grid, .projects-grid {
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+}
+
+.card, .project-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease;
+}
+
+.card:hover, .project-card:hover {
+    transform: translateY(-5px);
+}
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    background: white;
+    margin-top: 2rem;
+}
