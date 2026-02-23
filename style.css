@@ -62,14 +62,13 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-
 }
 
 .hero button {
     margin-top: 1rem;
     padding: 0.7rem 1.2rem;
     border: none;
-    background: var(--accent);
+    background: var(--secondary);
     color: white;
     cursor: pointer;
 }
@@ -102,6 +101,7 @@ body {
 footer {
     text-align: center;
     position: fixed;
+    bottom: 0;
     color: white; 
     padding: 2rem;
     background: var(--secondary);
