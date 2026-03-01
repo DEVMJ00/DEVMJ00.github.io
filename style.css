@@ -1,6 +1,7 @@
+
 :root {
     --primary: #0f172a;
-    --secondary : #1D809F; 
+    --secondary : ghostwhite ; 
     --accent: #2563eb;
     --bg: #f8fafc;
     --text: #1e293b;
@@ -18,22 +19,188 @@ body {
     color: var(--text);
 }
 
-.profile-picture {
-    max-width: 100px;
+.photo-profil {
+    max-width: 150px;
     width: 100%;
     height: auto;
     border-radius: 30%;
     object-fit: cover;
     margin-bottom: 1.5rem;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    /*box-shadow: 0 6px 20px rgba(0,0,0,0.15);*/
 }
 
-.navbar {
+/************************ NAVBAR ****************************/
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+	background-color : var(--primary); 
+    height : 50px;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.nav-links {
+display: flex;
+gap: 10px;
+}
+	  
+.nav-links.active {
+	display: flex; 
+    background-color: var(--primary);
+  }
+
+.nav-links.active a {
+    color: var(--secondary); 
+}
+
+.nav-links li {
+	text-align: center;
+	margin: 10px 0;
+    list-style: none;
+}
+  
+
+.nav-left {
+    display: flex;
+    justify-content: flex-start;
+    color : var(--secondary) ;
+    font-weight: bold;
+    font-size : 0.8em ;
+    align-items: center;
+    width: 70%;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-right: 1%;
+    width: 30%;
+}
+
+.nav-left a, .nav-right a {
+    font-family: "GothamRegular", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: var(--secondary);
+    padding: 15px;
+    transition: transform 0.2s ease;
+	text-decoration: none;
+}
+
+
+.burger {
+	display: none;
+	flex-direction: column;
+	gap: 5px;
+	cursor: pointer;
+}
+
+.burger span {
+    margin-right : 10px; 
+	width: 25px;
+	height: 3px;
+	background-color : var(--secondary); 
+}
+
+
+.hero-slogan {
+    display: flex;
+    color : var(--secondary); 
+    line-height: 2em;
+    font-weight: bold; 
+    animation: slideWords 6s infinite;
+}
+
+.hero-slogan span {
+    justify-content: flex-end;
+    font-size: 23px;;
+}
+
+.hero-slogan span::before {
+    content : "Analyser, Concevoir, Développer" ;
+    color : var(--accent); 
+    padding-right : 8px; 
+    animation : slogan 4s infinite
+
+}
+
+@keyframes slogan {
+    0%, 33% { 
+        content : "Analyser"; 
+    }
+
+    34%, 75% {
+        content : "Concevoir";
+    }
+    
+    76%, 100% {
+        content: "Développer";
+    }
+}
+
+/* Conteneur général */
+.badges {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top : 10px;
+    margin-bottom: 10px;
+    /* border : solid 1px red;  */
+}
+
+.badge {
+    padding: 4px 10px;
+    border-radius: 800px;
+    min-width : 50px;
+    max-width : 200px;
+    min-height: 10%;
+    max-height: 10%;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    
+    color: #ffffff;
+    background-color: var(--badge-color);
+    
+}
+
+/* Logo */
+.badge img {
+  width: 20px;
+  height: auto;
+  
+}
+
+/* Hover discret 
+.badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+*/
+
+
+/* Variante texte sombre (JS, Linux…)
+.tech-badge.dark-text {
+  color: #000000;
+}
+*/
+
+
+
+/********************** END NAVBAR CALL ASSIGN ***************************/
+
+/*.navbar {
     position: fixed;
     width: 100%;
-    height : 2vh;
+    height : 50px;
     top: 0;
-    background: var(--secondary);
+    background: var(--primary);
     color : white;
     display: flex;
     justify-content: space-between;
@@ -53,10 +220,10 @@ body {
     color: white;
     font-weight: 500;
 }
-
+*/
 .hero {
     height: 96vh;
-    background: var(--primary);
+    background: url('assets/Background.jpg');
     color: white;
     display: flex;
     flex-direction: column;
@@ -69,7 +236,7 @@ body {
     margin-top: 1rem;
     padding: 0.7rem 1.2rem;
     border: none;
-    background: var(--secondary);
+    background: var(--accent);
     color: white;
     cursor: pointer;
 }
@@ -78,6 +245,12 @@ body {
     padding: 6rem 2rem;
     max-width: 1100px;
     margin: auto;
+}
+
+#approche p {
+    margin : 15px;
+    font-style: italic;
+    
 }
 
 .skills-grid, .projects-grid {
@@ -100,13 +273,50 @@ body {
 }
 
 footer {
+    display : flex;
+    justify-content : center;
     text-align: center;
     position: fixed;
     bottom: 0;
     color: white; 
-    padding: 2rem;
-    background: var(--secondary);
+    /*padding: 2rem;*/
+    background: var(--primary);
     margin-top: 2rem;
     width : 100%;
-    height : 2vh;
+    height : 50px;
 }
+
+footer p {
+    font-size: 0.8rem;
+    align-content: center;
+}
+
+
+/************** MEDIA QUERIES NAVBAR  ************************/
+
+@media (max-width: 768px) {
+
+.burger {
+display: flex;
+}
+
+nav {
+position: relative;
+}
+
+.nav-links {
+display: none;
+flex-direction: column;
+position: absolute;
+top: 60px;
+left: 0;
+width: 100%;
+background: #333;
+padding: 20px 0;
+}
+
+.nav-links.active {
+display: flex;
+}
+}
+/************** END MEDIA QUERIES NAVBAR  ************************/
