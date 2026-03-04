@@ -1,223 +1,309 @@
-
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
 	<meta name="robots" content="noindex, nofollow">
-    <meta charset="UTF-8">
-    <title>Mario JODAR | Portfolio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+	<meta charset="UTF-8">
+	<title>Mario JODAR | Portfolio</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+	<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<nav>
-	<div class="nav-container">
-		<div class="nav-left">
-			<div>Portfolio - Mario JODAR</div>
-		</div>
-		
-		<div class="nav-right">
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#about">Profil</a></li>
-		<li><a href="#approche">Positionnement</a></li>
-        <li><a href="#skills">Compétences</a></li>
-        <!-- <li><a href="#formation">Formation</a></li> -->
-        <li><a href="#projects">Projets</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-		</div>
-	  
-    <div class="burger" id="burger">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </div>
-</nav>
+	<nav>
+		<div class="nav-container">
+			<div class="nav-left">
+				<div>Portfolio - Mario JODAR</div>
+			</div>
 
-<header class="hero">
-	 <img src="assets/picture.png" alt="Portrait du développeur" class="photo-profil">
-    <h1>Développeur Web</h1>
-    
-	<div class="hero-slogan">
+			<div class="nav-right">
+				<ul class="nav-links" id="navLinks">
+					<li><a href="#profil">Profil</a></li>
+					<li><a href="#approche">Positionnement</a></li>
+					<li><a href="#stack">Compétences</a></li>
+					<!-- <li><a href="#formation">Formation</a></li> -->
+					<li><a href="#projects">Projets</a></li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+			</div>
+
+			<div class="burger" id="burger">
+				<span></span>
+				<span></span>
+				<span></span>
+			</div>
+		</div>
+	</nav>
+
+	<header class="hero">
+		<img src="assets/picture.png" alt="Portrait du développeur" class="photo-profil">
+		<h1>Développeur Web</h1>
+
+		<div class="hero-slogan">
 			<span> une solution adaptée à chaque besoin </span>
-	</div>
+		</div>
+
+
+		<!-- <p>Créer des applications propres, performantes et maintenables.</p> -->
+
+		<a href="#projects" class="btn_bleu">Voir mes projets</a>
+	</header>
+
+	<section id="profil" class="section">
+		<h2>PROFIL</h2>
+		<p>Passionné par l’informatique, j'occupe une grande partie de son temps libre à coder et à la pratique du
+			karaté - un art martial qui renforce ma rigueur et ma persévérance ; des qualités disciplinaires que
+			j'applique pleinement à mes projets professionnels.
+		</p>
+
+	</section>
+
+
+	<section id="approche" class="section">
+	<h2>POSITIONNEMENT</h2>
+	Mario est un développeur en reconversion, autodidacte, avec une forte appétence pour la conception de solutions
+	complètes et cohérentes. Il aborde un projet dans sa globalité : architecture, logique métier, expérience
+	utilisateur et optimisation
+	des processus.
 	
-	
-	<!-- <p>Créer des applications propres, performantes et maintenables.</p> -->
-    <button onclick="scrollToSection('projects')">Voir mes projets</button>
+	<h3>Son approche technique</h3>
+	<h4>Vision systémique</h4>
+	<p>Il comprend les interactions entre les différentes couches d’une application (front-end, back-end, scripts,
+		automatisation) et cherche toujours à maintenir une cohérence d’ensemble.</p>
+
+	<h3>Rigueur et qualité</h3>
+	<p>Il accorde une attention particulière à la structure du code, à sa lisibilité et à sa maintenabilité. Il
+		privilégie les
+		solutions fiables et évolutives plutôt que les correctifs rapides.</p>
+
+	<h3>Automatisation et optimisation</h3>
+	<p>Il aime identifier les tâches répétitives ou chronophages pour les transformer en processus automatisés, sécurisés et reproductibles.</p>
+	<br>
+	<h3>Sa manière de travailler</h3> 
+	<h4>Organisation et méthode</h4>
+	<p>Il travaille avec des objectifs clairs, des étapes définies et un cadre structuré. Il avance avec constance et
+		privilégie la continuité à l’improvisation.</p>
+
+	<h4>Persévérance</h4>
+	<p>Face à un problème technique, il analyse, teste, ajuste et ne se décourage pas facilement.</p>
+
+	<h4>Travail collaboratif</h4>
+	<p>Il valorise la communication claire et le respect des engagements. Il recherche des environnements où la qualité
+		du collectif prime sur la compétition individuelle.</p>
+	</section>
 
 
-</header>
+	<section id="stack" class="section">
+		<h2>Stack-Technique</h2>
+		<div class="stack-card">HTML</div>
+		<div class="stack-card">CSS</div>
+		<div class="stack-card">Java</div>
+		<div class="stack-card">JavaScript</div>
+		<div class="stack-card">PHP</div>
+		<div class="stack-card">Symfony</div>
+		<div class="stack-card">Python</div>
+		<div class="stack-card">Django</div>
+		<div class="stack-card">MySQL</div>
+		<div class="stack-card">Postgre SQL</div>
+		<div class="stack-card">PowerShell</div>
+	</section>
 
-<section id="about" class="section">
-    <h2>Profil</h2>
-    <p>Passionné par l’informatique, j’occupe une grande partie de mon temps libre à coder et à la pratique du 
-karaté - un art martial qui renforce ma rigueur et ma persévérance ; des qualités disciplinaires que 
-j’applique pleinement à mes projets professionnels.</p>
-</section>
 
-<section id="approche" class="section">
+	<section id="projects" class="section">
+		<h2>Projets</h2>
+		<div class="card">
+			<h3>KEY FINDER</h3>
+			<div class="badges">
+				<span class="badge" style="--badge-color:#E34F26;">
+					<i class="fa-brands fa-html5"></i> HTML</span>
+
+				<span class="badge" style="--badge-color:#1572B6;">
+					<i class="fa-brands fa-css3-alt"></i> CSS</span>
+
+				<span class="badge" style="--badge-color:#F7DF1E; color: var(--primary)">
+					<i class="fa-brands fa-square-js"></i> JavaScript</span>
+
+				<span class="badge" style="--badge-color:#3776AB;">
+					<i class="fa-brands fa-python"></i> Python</span>
 
 
-	<h2>Approche Pro.</h2>
-	<p> Mario adopte une approche structurée et réfléchie du travail. Avant d’agir, il analyse le contexte, 
-		identifie les contraintes et clarifie les objectifs. Il accorde une importance particulière au cadre et aux 
-		processus, considérant qu’un projet bien défini en amont permet d’éviter les corrections coûteuses en aval.
-	</p>
-	
-	<h3>Organisation et structuration</h3>
-	<p>
-		Organiser est pour lui une activité centrale. Il s’investit pleinement lorsqu’il s’agit de cadrer un projet, définir des priorités, fixer des échéances et structurer une progression logique. Il éprouve des difficultés à avancer sans visibilité claire : il privilégie les environnements où les objectifs sont explicités et les responsabilités définies.
-	</p>
+				<span class="badge" style="--badge-color:#092E20;">
+					<img src="_____" alt=""> Django</span>
 
-	<h3>Qualité et fiabilité</h3>
-	<p>
-		Il attache une attention constante à la qualité du travail fourni. Méticuleux, il vérifie ses réalisations et limite les erreurs par une démarche méthodique. Il recherche la fiabilité aussi bien dans le fond (robustesse, cohérence) que dans la forme (clarté, lisibilité, rendu). La possibilité de perfectionner un travail, d’en améliorer la structure ou l’efficacité, constitue pour lui une source de motivation forte.
-	</p>
-	
-	<h3>Persévérance et continuité</h3>
-	<p>Tenace, il ne se décourage pas face aux difficultés techniques. Il privilégie la continuité et l’amélioration progressive plutôt que les changements brusques. Cette constance lui permet d’approfondir les sujets et de consolider ses acquis dans la durée.</p>
+				<span class="badge" style="--badge-color:#336791;">
+					<i class="fa-solid fa-database"></i> PostgreSQL</span>
+			</div>
+			<p>Application web de gestion de traçabilité des clefs pour le secteur de l’immobilier.
+				Mise en place de l’authentification et gestion des droits utilisateurs.
+				Suivi du développement collaboratif via GitHub.</p>
+		</div>
 
-	<h3>Relation professionnelle</h3>
-	<p>
-		Dans ses relations de travail, il crée facilement le contact et se montre avenant. Il sait toutefois conserver une distance professionnelle appropriée, ce qui lui permet de maintenir un cadre sain et respectueux. Il est attaché au travail d’équipe et au soutien mutuel, et s’inscrit davantage dans une logique de coopération que de compétition.
-	</p>
 
-	<h3>Gestion des émotions et des contraintes</h3>
-	<p>
-		Il maîtrise ses émotions et veille à ne pas les répercuter sur son environnement. Ses décisions sont réfléchies et sécurisées par l’analyse des conséquences possibles. Il fait preuve de réactivité et d’un réel sens de l’urgence lorsque la situation l’exige, tout en conservant un souci de qualité.
-	</p>
+		<div class="card">
+			<h3>CALL ASSIGN</h3>
+			<div class="badges">
+				<span class="badge" style="--badge-color:#E34F26;">
+					<i class="fa-brands fa-html5"></i> HTML</span>
 
-	<h3>Environnement de travail recherché</h3>
-	<p>
-	Il s’épanouit dans des environnements structurés, collaboratifs et exigeants, où la clarté des objectifs et la qualité du travail priment sur l’improvisation. Il apprécie les managers attentifs à la cohésion d’équipe et au développement des compétences, capables de conjuguer exigence et écoute.
-	</p>
-</section>
+				<span class="badge" style="--badge-color:#1572B6;">
+					<i class="fa-brands fa-css3-alt"></i> CSS</span>
 
-	<section id="skills" class="section">
-    <h2>Stack-Technique</h2>
-    <div class="skills-grid">
-        <div class="card">HTML</div>
-        <div class="card">CSS</div>
-        <div class="card">JavaScript</div>
-        <div class="card">PHP</div>
-        <div class="card">Symfony</div>
-        <div class="card">Python</div>
-		<div class="card">Django</div>
-		<div class="card">MySQL</div>
-		<div class="card">Postgre SQL</div>
-		<div class="card">PowerShell</div>
-    </div>
-</section>
+				<span class="badge" style="--badge-color:#3776AB;">
+					<i class="fa-brands fa-python"></i> Python</span>
 
-<!--
-<section id="formation" class="section">
-    <h2>Formation</h2>
-    <div>
-		<p>2024 : Développeur web & web mobile - Titre RNCP de Niveau 5 (Bac +2)</p>
-		<p>2011 : BTS Professions Immobilières </p>
-		<p>2009 : BTS Commerce International </p>
-    </div>
-</section>
+				<span class="badge" style="--badge-color:#092E20;">
+					<img src="_____" alt=""> Django</span>
 
--->
-	
-<section id="projects" class="section">
-    <h2>Projets</h2>
-		<div class="projects-grid">
-	        <div class="project-card">
-	            <h3>Key Finder</h3>
-				<div class="badges">
-					<span class="badge" style="--badge-color:#E34F26;">
-					<img src="assets/HTML.png" alt="HTML">HTML</span>
-					
-					<span class="badge" style="--badge-color:#1572B6;">
-					<img src="assets/CSS.png" alt="CSS">CSS</span>
-					
-					<span class="badge" style="--badge-color:#F7DF1E; color: var(--primary)">
-					<img src="assets/JAVASCRIPT.png" alt="CSS">JavaScript</span>
+				<span class="badge" style="--badge-color:#336791;">
+					<i class="fa-solid fa-database"></i> PostgreSQL</span>
 
-					<span class="badge" style="--badge-color:#3776AB;">
-					<img src="assets/Python.png" alt="CSS">Python</span>
-
-					<span class="badge" style="--badge-color:#034101;">
-					<img src="_____" alt="CSS">Django</span>
-					
-					<span class="badge" style="--badge-color:#4d4d4d;">
-					<img src="assets/SQL.png" alt="CSS">PostgreSQL</span>
-					
-				</div>
-
-	            <p>Application web de gestion de traçabilité des clefs pour le secteur de l’immobilier. 
-					Mise en place de l’authentification et gestion des droits utilisateurs. 
-					Suivi du développement collaboratif via GitHub.</p>
-	        </div>
-	        <div class="project-card">
-	            <h3>CALL ASSIGN</h3>
-				<div class="badges">
-					<span class="badge" style="--badge-color:#3776AB;">
-					<img src="assets/Python.png" alt="CSS">Python</span>
-
-					<span class="badge" style="--badge-color:#034101;">
-					<img src="_____" alt="CSS">Django</span>
-					
-					<span class="badge" style="--badge-color:#4d4d4d;">
-					<img src="assets/SQL.png" alt="CSS">PostgreSQL</span>
-
-					<span class="badge" style="--badge-color:#4d4d4d;">
-					<img src="_____" alt="CSS">Asterisk</span>
-				</div>
-
-	            <p>Conception et développement complet d’une application web de gestion des transferts d’appels. 
-					Mise en place d’une interface responsive et ergonomique permettant de configurer dynamiquement les lignes d’astreinte
-					 téléphonique selon les plages horaires et les secteurs d’activité. 
-					 Implémentation d’un système de gestion des priorités d’appels pour optimiser le routage des communications. 
-					 Déploiement d’une solution fonctionnelle et scalable, assurant une prise en charge efficace des demandes des utilisateurs.
-					 Python, Django, PostgreSQL et Asterisk</p>
-	        </div>
-
-			<div class="project-card">
-	            <h3>Projets ENI</h3>
-	            <p>Développement d’un site d’enchères sous Java EE et SQL Server : application web organisée en couches.
-					Développement d’un site internet d’organisation de sorties entre élèves gestion des utilisateurs et des rôles, création d’un back-office pour l'administration des contenus, suivi des bonnes pratiques de développement PHP, Symfony et MySQL, ORM Doctrine
-				</p>
+				<span class="badge" style="--badge-color:#4d4d4d;">
+					<img src="_____" alt=""> Asterisk</span>
 			</div>
 
-			<div class="project-card">
-				<h3> Rename-me </h3>
-				<p> Contexte : Besoin de renommer rapidement des fichier *.msg avec nomenclature homogène et horodatée.
-					Problème : Renommage manuel chronophage et source d’erreurs, absence de standardisation.
-					Solution : Développement d’un scriptavec interface graphique, appliquant un schéma de nommage configurable.
-					Résultat : Gain de temps significatif, suppression des erreurs humaines et uniformisation complète. </p>
+			<p>Conception et développement complet d’une application web de gestion des transferts d’appels.
+				Mise en place d’une interface responsive et ergonomique permettant de configurer dynamiquement les
+				lignes d’astreinte
+				téléphonique selon les plages horaires et les secteurs d’activité.
+				Implémentation d’un système de gestion des priorités d’appels pour optimiser le routage des
+				communications.
+				Déploiement d’une solution fonctionnelle et scalable, assurant une prise en charge efficace des demandes
+				des utilisateurs.
+			</p>
+		</div>
+		</div>
+
+
+		<div class="card">
+			<h3>ENI-ENCHERES</h3>
+			<div class="badges">
+				<span class="badge" style="--badge-color:#E34F26;">
+					<i class="fa-brands fa-html5"></i> HTML</span>
+
+				<span class="badge" style="--badge-color:#1572B6;">
+					<i class="fa-brands fa-css3-alt"></i> CSS</span>
+
+				<span class="badge" style="--badge-color:#3776AB;">
+					<i class="fa-brands fa-java"></i> Java</span>
+
+				<span class="badge" style="--badge-color:#4479A1;">
+					<i class="fa-solid fa-database"></i> SQL</span>
 			</div>
-			
-			<div class="project-card">
-				<h3> ARC </h3>
-				<p>  </p>
-		 	</div>
+			<p>Développement d’un site d’enchères sous Java EE et SQL Server : application web organisée en couches.</p>
+		</div>
 
-			<div class="project-card">
-				<h3> WorkClock </h3>
-				<p>  </p>
-	        </div>
-    	</div>
-</section>
+		<div class="card">
+			<h3>IKOUZO</h3>
+			<div class="badges">
+				<span class="badge" style="--badge-color:#777BB4;">
+					<i class="fa-brands fa-php"></i> PHP</span>
 
-<section id="contact" class="section">
-    <h2>Contact</h2>
-	<p>Ville : Grenoble</p>
-	<p>Tél. : cf. Curriculum Vitae </p>
-    <p>Email : <a href="mailto:dev.mj@hotmail.com"> dev.mj@hotmail.com </a></p>
-</section>
+				<span class="badge" style="--badge-color:#3776AB;">
+					<i class="fa-brands fa-python"></i> Symfony</span>
 
-<footer>
-  <p>  © 2026 - PortFolio - Mario JODAR - Usage professionnel uniquement </p>
-</footer>
+				<span class="badge" style="--badge-color:#3776AB;">
+					<i class="fa-solid fa-database"></i> MySQL</span>
+			</div>
+			<p>
+				Développement d’un site internet d’organisation de sorties entre élèves gestion des utilisateurs et des
+				rôles, création d’un back-office pour
+				l'administration des contenus, suivi des bonnes pratiques de développement.
+			</p>
+		</div>
 
-<script src="scripts.js" ></script>
+		<div class="card">
+			<h3> Rename-me </h3>
+			<div class="badges">
+				<span class="badge" style="--badge-color:#3776AB;">
+					<i class="fa-solid fa-terminal"></i> Powershell</span>
+			</div>
 
-	
-<script src="https://kit.fontawesome.com/f8c7cb437f.js" crossorigin="anonymous"></script>
+			<p> Contexte : Besoin de renommer rapidement des fichier *.msg avec nomenclature homogène et horodatée.
+				Problème : Renommage manuel chronophage et source d’erreurs, absence de standardisation.
+				Solution : Développement d’un scriptavec interface graphique, appliquant un schéma de nommage
+				configurable.
+				Résultat : Gain de temps significatif, suppression des erreurs humaines et uniformisation complète. </p>
+		</div>
+
+		<div class="card">
+			<h3> ARC </h3>
+			<div class="badges">
+				<span class="badge" style="--badge-color:#3776AB;">
+					<i class="fa-solid fa-terminal"></i> Powershell</span>
+			</div>
+			<p> Administrate, Regulate, Control </p>
+		</div>
+
+		<div class="card">
+			<h3> WorkClock </h3>
+			<div class="badges">
+				<span class="badge" style="--badge-color:#3776AB;">
+					<i class="fa-brands fa-python"></i> PowerShell</span>
+			</div>
+			<p> Gestion du timing </p>
+		</div>
+	</section>
+
+	<section id="contact" class="section">
+		<h2>Contact</h2>
+		<p>Ville : Grenoble</p>
+		<p>Tél. : cf. Curriculum Vitae </p>
+		<p>Email : <a href="mailto:dev.mj@hotmail.com"> dev.mj@hotmail.com </a></p>
+	</section>
+
+	<footer>
+		<p> © 2026 - PortFolio - Mario JODAR </p>
+	</footer>
+
+	<script src="scripts.js"></script>
+
+
+	<script src="https://kit.fontawesome.com/f8c7cb437f.js" crossorigin="anonymous"></script>
 </body>
+
 </html>
+
+
+<!-- <p>
+			Organiser est pour lui une activité centrale. Il s’investit pleinement lorsqu’il s’agit de cadrer un projet,
+			définir des priorités, fixer des échéances et structurer une progression logique. Il éprouve des difficultés
+			à avancer sans visibilité claire : il privilégie les environnements où les objectifs sont explicités et les
+			responsabilités définies.
+		</p>
+
+		<h3>Qualité et fiabilité</h3>
+		<p>
+			Il attache une attention constante à la qualité du travail fourni. Méticuleux, il vérifie ses réalisations
+			et limite les erreurs par une démarche méthodique. Il recherche la fiabilité aussi bien dans le fond
+			(robustesse, cohérence) que dans la forme (clarté, lisibilité, rendu). La possibilité de perfectionner un
+			travail, d’en améliorer la structure ou l’efficacité, constitue pour lui une source de motivation forte.
+		</p>
+
+		<h3>Persévérance et continuité</h3>
+		<p>Tenace, il ne se décourage pas face aux difficultés techniques. Il privilégie la continuité et l’amélioration
+			progressive plutôt que les changements brusques. Cette constance lui permet d’approfondir les sujets et de
+			consolider ses acquis dans la durée.</p>
+
+		<h3>Relation professionnelle</h3>
+		<p>
+			Dans ses relations de travail, il crée facilement le contact et se montre avenant. Il sait toutefois
+			conserver une distance professionnelle appropriée, ce qui lui permet de maintenir un cadre sain et
+			respectueux. Il est attaché au travail d’équipe et au soutien mutuel, et s’inscrit davantage dans une
+			logique de coopération que de compétition.
+		</p>
+
+		<h3>Gestion des émotions et des contraintes</h3>
+		<p>
+			Il maîtrise ses émotions et veille à ne pas les répercuter sur son environnement. Ses décisions sont
+			réfléchies et sécurisées par l’analyse des conséquences possibles. Il fait preuve de réactivité et d’un réel
+			sens de l’urgence lorsque la situation l’exige, tout en conservant un souci de qualité.
+		</p>
+
+		<h3>Environnement de travail recherché</h3>
+		<p>
+			Il s’épanouit dans des environnements structurés, collaboratifs et exigeants, où la clarté des objectifs et
+			la qualité du travail priment sur l’improvisation. Il apprécie les managers attentifs à la cohésion d’équipe
+			et au développement des compétences, capables de conjuguer exigence et écoute.
+		</p> -->
