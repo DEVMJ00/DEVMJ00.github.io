@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
     const burger = document.getElementById("burger");
-    const burger = document.getElementById('burger');
 const navLinks = document.getElementById('navLinks');
 const links = document.querySelectorAll('.nav-links a');
 
