@@ -286,6 +286,7 @@ nav {
     width: 25px;
     height: 3px;
     background-color: var(--secondary);
+	border-radius : 50px;
 }
 
 /************************ END NAVBAR ***************************************/
