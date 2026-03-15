@@ -1,3 +1,8 @@
+window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
+});
+
+
 /**
  * ============================================
  * MODULE: Navigation Mobile (Burger Menu)
@@ -6,13 +11,15 @@
  * Objectif : Gérer l'ouverture/fermeture du menu mobile
  * et assurer l'accessibilité (clavier + lecteurs d'écran)
  * 
+ * Auteur : [Ton nom]
+ * Date : [Date]
  */
 
 (function() {
     'use strict'; // Active le mode strict pour éviter les erreurs silencieuses
     
     /**
-     * Attendre que le DOM soit complètement chargé
+     * Attends que le DOM soit complètement chargé
      * avant d'exécuter le code
      */
     document.addEventListener('DOMContentLoaded', function() {
