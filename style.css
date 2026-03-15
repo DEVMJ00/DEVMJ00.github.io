@@ -312,14 +312,15 @@ p{
     flex-wrap: wrap;
     max-width: 1200px;
     margin: auto;
-    padding : 2%;
+    /*padding : 2%;*/
     
-    /* border: solid 1px red; ; */
+
 }
 
 .section > #projects {
 	column-gap: 20px;
     row-gap : 30px; 
+    border: solid 1px red; 
 }
 
 .stack-card {
