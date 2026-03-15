@@ -364,7 +364,6 @@ p{
         padding : 4%;
     }
     #stack {
-		flex-direction : column ;
 		justify-content: space-evenly;
 		column-gap : 3px;
         /* margin : auto ;  */
