@@ -1,6 +1,6 @@
 :root {
     --primary: #0f172a;
-    --secondary: ghostwhite;
+    --secondary: #f8faff;  /* ghostwhite en hex */
     --accent: #2563eb;
     --bg: #f8fafc;
     --text: #1e293b;
@@ -35,6 +35,7 @@
     width: auto;
     min-height: 10%;
     max-height: 10%;
+    line-height: 1.5;
     font-size: 0.7rem;
     font-weight: 600;
     letter-spacing: 0.3px;
@@ -55,14 +56,19 @@ body {
     background: var(--bg);
     color: var(--text);
     overflow-y: scroll;
+    padding-bottom: 60px;  /* Espace pour le footer */
 }
 
-.btn_bleu {
+button {
+    all: unset; /* Réinitialise tous les styles (bordure, background, etc.) */
+}
+
+.btn_bleu, .btn_orange {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #355eff;
     border-radius: 6px;
+	border : 0px; 
     height: 40px;
     width: 150px;
     box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.3),
@@ -74,6 +80,13 @@ body {
     margin-top: 1%;
 }
 
+.btn_bleu {
+	background-color: #355eff;
+}
+
+.btn_orange {
+	background-color : orange;
+}
 
 .btn_bleu:hover {
     cursor: pointer;
@@ -82,10 +95,17 @@ body {
     color: ghostwhite;
 }
 
+.btn_orange:hover {
+    cursor: pointer;
+    background-color: darkorange;
+    text-decoration: none;
+    color: ghostwhite;
+}
+
 .card,
 .stack-card {
-    margin-bottom: 50px;
-    width: 365px;
+
+    width: 350px;
     background: white;
     padding: 1.5rem;
     border-radius: 8px;
@@ -115,23 +135,31 @@ footer {
 footer p {
     font-size: 0.8rem;
     align-content: center;
-}
+    color : white; 
 
+}
 
 h2 {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: auto;
+    color: var(--accent);
     margin-top: 3%;
-    margin-right: 80%;
-    margin-bottom: 1%;
-    color: var(--accent)
 }
 
-h3 {
-    margin-top: 2%;
-}
 
-h4 {
-    margin-right: 850px;
-}
+/* h2, h4 {
+
+    margin-right: auto;
+    
+} */
+
+
+
+
+
 
 .hero {
     height: 96vh;
@@ -261,6 +289,13 @@ nav {
 
 /************************ END NAVBAR ***************************************/
 
+
+
+p{
+    font-size : 16px; 
+    color : rgba(72, 77, 81, 0.8)
+}
+
 .photo-profil {
     max-width: 150px;
     width: 100%;
@@ -271,13 +306,19 @@ nav {
     /*box-shadow: 0 6px 20px rgba(0,0,0,0.15);*/
 }
 
+
+
+
 .section {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     max-width: 1200px;
     margin: auto;
-    gap: 3%;
+    padding : 2%;
+    column-gap: 20px;
+    row-gap : 30px;  
+    /* border: solid 1px red; ; */
 }
 
 
@@ -303,14 +344,24 @@ nav {
     }
 }
 
-/************** MEDIA QUERIES NAVBAR  ************************/
+/************** MEDIA QUERIES   ************************/
 
 @media (max-width: 768px) {
 
     .burger {
         display: flex;
     }
-
+    
+    .card,
+    .stack-card {
+        margin-bottom: 50px;
+        width: 100%;
+        padding : 4%;
+    }
+    #stack {
+        justify-content: space-evenly;
+        /* margin : auto ;  */
+    }
     nav {
         position: relative;
     }
@@ -331,7 +382,7 @@ nav {
     }
 }
 
-/************** END MEDIA QUERIES NAVBAR  ************************/
+/************** END MEDIA QUERIES   ************************/
 
 
 /* .container {
