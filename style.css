@@ -286,12 +286,10 @@ nav {
     width: 25px;
     height: 3px;
     background-color: var(--secondary);
-	border-radius : 50px;
+	border-radius: 50px;
 }
 
 /************************ END NAVBAR ***************************************/
-
-
 
 p{
     font-size : 16px; 
@@ -308,9 +306,6 @@ p{
     /*box-shadow: 0 6px 20px rgba(0,0,0,0.15);*/
 }
 
-
-
-
 .section {
     display: flex;
     flex-direction: row;
@@ -318,11 +313,14 @@ p{
     max-width: 1200px;
     margin: auto;
     padding : 2%;
-    column-gap: 20px;
-    row-gap : 30px;  
+    
     /* border: solid 1px red; ; */
 }
 
+.section > #projects {
+	column-gap: 20px;
+    row-gap : 30px; 
+}
 
 .stack-card {
     max-width: 150px;
