@@ -89,6 +89,13 @@ button {
 	background-color : orange;
 }
 
+.more {
+	max-height : 25px;
+    font-size : 0.8rem;
+
+}
+
+
 .btn_bleu:hover {
     cursor: pointer;
     background-color: darkblue;
