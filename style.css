@@ -87,12 +87,8 @@ button {
 
 .btn_orange {
 	background-color : orange;
-}
-
-.more {
 	max-height : 25px;
     font-size : 0.8rem;
-
 }
 
 
@@ -320,14 +316,14 @@ p{
     flex-wrap: wrap;
     max-width: 1200px;
     margin: auto;
-    /*padding : 2%;*/
-    
+    padding: 2%;
+
 
 }
 
 .section > #projects {
 	column-gap: 20px;
-    row-gap : 30px; 
+    row-gap: 30px; 
     border: solid 1px red; 
 }
 
@@ -361,18 +357,18 @@ p{
         display: flex;
     }
     #contact {
-       flex-direction : column ;
-	   column-gap : 3px;
+       flex-direction: column ;
+	   column-gap: 3px;
 	}
     .card,
     .stack-card {
         margin-bottom: 50px;
         width: 100%;
-        padding : 4%;
+        padding: 4%;
     }
     #stack {
 		justify-content: space-evenly;
-		column-gap : 3px;
+		column-gap: 3px;
         /* margin : auto ;  */
     }
     nav {
