@@ -1,114 +1,109 @@
-window.addEventListener('load', () => {
-    document.body.classList.add('loaded');
-});
-
-
 /**
  * ============================================
  * MODULE: Navigation Mobile (Burger Menu)
  * ============================================
- * 
- * Objectif : Gérer l'ouverture/fermeture du menu mobile
- * et assurer l'accessibilité (clavier + lecteurs d'écran)
- * 
- * Auteur : [Ton nom]
- * Date : [Date]
  */
 
 (function() {
-    'use strict'; // Active le mode strict pour éviter les erreurs silencieuses
-    
-    /**
-     * Attends que le DOM soit complètement chargé
-     * avant d'exécuter le code
-     */
-    document.addEventListener('DOMContentLoaded', function() {
-        
-        // --- Sélection des éléments du DOM ---
+    'use strict';
+
+     // Attends que TOUT soit chargé (DOM + ressources)
+    window.addEventListener('load', function init() {
+
+         // --- Sélection des éléments ---
         const burger = document.getElementById('burger');
         const navLinks = document.getElementById('navLinks');
         const links = document.querySelectorAll('.nav-links a');
         
         // --- Vérification de sécurité ---
-        // Si un élément n'existe pas, on arrête proprement
         if (!burger || !navLinks) {
-            console.warn('[Navigation] Un élément manquant : burger ou navLinks');
+            console.error('[Navigation] Éléments manquants:', { burger: !!burger, navLinks: !!navLinks });
             return;
         }
         
-        // --- Initialisation de l'état du menu ---
-        // On s'assure que l'attribut aria est présent pour l'accessibilité
-        if (!burger.hasAttribute('aria-expanded')) {
-            burger.setAttribute('aria-expanded', 'false');
-        }
-        if (!burger.hasAttribute('aria-controls')) {
-            burger.setAttribute('aria-controls', 'navLinks');
-        }
+        // --- Initialisation ARIA ---
+        burger.setAttribute('aria-expanded', 'false');
+        burger.setAttribute('aria-controls', 'navLinks');
+
+
+
+          // --- Variables d'état ---
+        let isMenuOpen = false;
+        const MOBILE_BREAKPOINT = 768;
         
-        // --- Fonction : Ouvrir/Fermer le menu ---
+        // --- Fonctions ---
         function toggleMenu() {
-            const isActive = navLinks.classList.toggle('active');
+            isMenuOpen = !isMenuOpen;
+            navLinks.classList.toggle('active', isMenuOpen);
+            burger.setAttribute('aria-expanded', isMenuOpen.toString());
             
-            // Mise à jour de l'attribut ARIA pour les lecteurs d'écran
-            burger.setAttribute('aria-expanded', isActive.toString());
-            
-            // Gestion du focus pour l'accessibilité
-            if (isActive) {
-                // Quand on ouvre, on met le focus sur le premier lien
+            // Gestion du focus
+            if (isMenuOpen) {
                 const firstLink = navLinks.querySelector('a');
                 if (firstLink) firstLink.focus();
             } else {
-                // Quand on ferme, on remet le focus sur le bouton burger
                 burger.focus();
             }
         }
         
-        // --- Fonction : Fermer le menu ---
         function closeMenu() {
-            if (navLinks.classList.contains('active')) {
+            if (isMenuOpen) {
+                isMenuOpen = false;
                 navLinks.classList.remove('active');
                 burger.setAttribute('aria-expanded', 'false');
                 burger.focus();
             }
         }
         
-        // --- Événement : Clic sur le bouton burger ---
-        burger.addEventListener('click', toggleMenu);
+        // --- Événements ---
         
-        // --- Événement : Clic sur un lien de navigation ---
-        // Ferme automatiquement le menu après sélection
+        // Toggle au clic/touch sur le burger
+        burger.addEventListener('click', toggleMenu);
+        burger.addEventListener('touchstart', function(e) {
+            e.preventDefault(); // Empêche le double-clic
+            toggleMenu();
+        });
+        
+        // Fermeture au clic sur un lien
         links.forEach(link => {
             link.addEventListener('click', closeMenu);
         });
         
-        // --- Événement : Touche Échap ---
-        // Permet de fermer le menu avec le clavier (accessibilité)
+        // Fermeture avec Échap
         document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') {
                 closeMenu();
             }
         });
         
-        // --- Événement : Clic extérieur ---
-        // Ferme le menu si on clique en dehors
+        // Fermeture au clic extérieur (avec débogage)
         document.addEventListener('click', function(event) {
-            if (navLinks.classList.contains('active')) {
-                // Si le clic n'est ni sur le burger ni dans le menu
-                if (!burger.contains(event.target) && !navLinks.contains(event.target)) {
+            if (isMenuOpen) {
+                const clickedInside = burger.contains(event.target) || navLinks.contains(event.target);
+                if (!clickedInside) {
                     closeMenu();
                 }
             }
         });
         
-        // --- Événement : Redimensionnement fenêtre ---
-        // Ferme le menu si on passe en desktop (responsive)
+        // Resize: seulement si on passe DE mobile vers desktop
+        let wasMobile = window.innerWidth <= MOBILE_BREAKPOINT;
+        
         window.addEventListener('resize', function() {
-            if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
+            const isMobile = window.innerWidth <= MOBILE_BREAKPOINT;
+            
+            // Seulement si on quitte le mode mobile
+            if (wasMobile && !isMobile && isMenuOpen) {
                 closeMenu();
             }
+            
+            wasMobile = isMobile;
         });
         
-        // --- Log de débogage (à retirer en production) ---
-        console.log('[Navigation] Module initialisé avec succès');
+        // --- Debug (retirer en production) ---
+        console.log('[Navigation] Module initialisé - Burger:', burger, 'NavLinks:', navLinks);
+        
+        // Nettoyage de l'écouteur d'initialisation
+        window.removeEventListener('load', init);
     });
 })();
