@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotnix - Code et aperçu</title>
+
+    <!-- CSS global -->
+    <link rel="stylesheet" href="../style.css">
+
+    <!-- Prism.js pour coloration syntaxique -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+
+    <!-- CSS pour pages de code -->
+    <link rel="stylesheet" href="../CSS/code.css">
+
+
+</head>
+
+<body>
+
+    <header>
+
+        <h1>Spotnix</h1>
+        <h2>Serveur multimédia local en Python/Django. Page de démonstration et extrait de code.</h2>
+
+    </header>
+
+    <main class="project">
+
+        <!-- Section aperçu visuel -->
+        <section class="project-demo">
+            <img src="../assets/spotnix.png" alt="Capture d'écran Spotnix" class="project-img">
+        </section>
+
+        <!-- Section code -->
+        <section class="project-code">
+            <h3>Extrait de code</h3>
+
+            <!-- Onglets pour fichiers -->
+            <div class="code-tabs">
+                <button class="tab active" data-file="python">views.py</button>
+                <button class="tab" data-file="html">html</button>
+                <button class="tab" data-file="css">css</button>
+                <button class="tab" data-file="js">javascript</button>
+            </div>
+
+            <div class="code-content">
+                <!-- Python -->
+                <pre class="code-block active" id="python"><code class="language-py">
+
+
+def recuperer_metadonnees_tmdb(titre_film):
+    # clé API TMDb
+    tmdb.API_KEY = settings.TMDB_API_KEY
+    print(f"clé: ", tmdb.API_KEY)
+    """
+    Recherche un film par titre sur TMDb et retourne ses métadonnées principales.
+    
+    Args:
+        titre_film (str): titre du film à rechercher.
+    
+    Returns:
+        dict ou None: Dictionnaire avec titre, année, affiche, synopsis, ou None si non trouvé.
+    """
+    recherche = tmdb.Search()
+    reponse = recherche.movie(query=titre_film, language='fr-FR')
+    results = reponse.get('results', [])
+
+    if not results:
+        return None
+
+    film = results[0]  # prendre le premier résultat
+
+    # Récupérer les détails du film
+    movie = tmdb.Movies(film['id'])
+    details = movie.info(language='fr-FR')  # détails en français
+    genres = [genre['name'] for genre in details.get('genres', [])]  # liste des genres
+    duree = details.get('runtime')  # durée en minute
+
+    return {
+        'titre': details.get('title'),
+        #'annee': details.get('release_date', '')[:4],
+        'affiche': f"https://image.tmdb.org/t/p/w500{details.get('poster_path')}" if details.get('poster_path') else None,
+        #'synopsis': details.get('overview'),
+        #'genre': genres,
+        #'duree': duree,
+        'id_tmdb': details.get('id')  # ID TMDb pour requêtes future
+    }
+
+	 
+ </code>  
+ </pre>
+
+                <!-- HTML -->
+                <pre class="code-block active" id="html"><code class="language-html">
+<body >
+<header>
+    {% if not hide_footer_nav %}
+        <nav>
+            {% include 'spotnix/fragments/navbar.html' %}
+        </nav>
+    {% endif %}
+</header>
+{#<main class="container">#}
+<main>
+
+    <div class="background"></div>
+    <!--ZONE D'AFFICHAGE D'UN MESSAGE-->
+    {% if messages %}
+        <div class="alert-container">
+            {% for text in messages %}
+                <div class="alert alert-{{ text.tags }}">
+                    {{ text }}
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% block content %}
+    {% endblock content %}
+</main>
+{% if not hide_footer_nav %}
+    <footer>
+        {% include 'spotnix/fragments/footer.html' %}
+    </footer>
+{% endif %}
+
+<script>
+    const username = "{{ username }}";
+</script>
+
+<script src="{% static 'js/messages.js' %}"></script>
+{% block javascript %}
+{% endblock javascript %}
+</body>
+            </code></pre>
+
+                <!-- CSS -->
+                <pre class="code-block" id="css"><code class="language-css">
+:root {
+    --color-nav: #347D39;
+    --color-card: #065A82;
+    --color-red: #e50914; /* rouge Netflix */
+    --color-font-white: #f8f8ff;
+    --color-font-nav: #afafaf;
+    --couleur-secondaire: #00A0D4;
+}
+
+.logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    color: var(--color-red);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.9);
+    background-color: black;
+    padding: 20px;
+    display: inline-block;
+}
+
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;    
+    width: 100%;
+    height: 100%;
+    background: black;
+    filter: blur(0px);
+    z-index: -1;
+}
+
+
+/******************************** ALERTES MESSAGES **************************************/
+.alert-container, .alert, .alert-error, .alert-success {
+    position: fixed;
+    display: flex;
+    z-index: 1;
+    height: 26px;
+    justify-content: center;
+    align-items: center;
+    width: 101%;
+    pointer-events: none; /* Désactive les événements de pointer pour que les clics passent à travers */
+    margin-top: 6px;
+    color: ghostwhite;
+}
+
+.alert-error {
+    background-color: #a80e1c;
+}
+
+.alert-success {
+    
+    background-color: rgba(36, 109, 143, 0.5);
+}
+/*#########################################################################*/
+
+            </code></pre>
+
+                <!-- JS -->
+                <pre class="code-block" id="js"><code class="language-javascript">
+    // Attendre que le DOM soit complètement chargé
+    document.addEventListener('DOMContentLoaded', function () {
+        // Sélectionner le conteneur de messages
+        const messageContainer = document.querySelector('.alert-container');
+        // Si le conteneur de messages existe
+        if (messageContainer) {
+            // setTimeout(function() {
+                messageContainer.classList.add('message');
+
+            // Cacher les messages après 3 secondes (3000 millisecondes)
+            setTimeout(function () {
+                messageContainer.style.display = 'none';
+            }, 5000);
+        }
+    });
+            </code></pre>
+
+            </div>
+        </section>
+        <footer>
+            <a href="../index.html" class="btn_back">Retour</a>
+            <!--  <a href="https://github.com/votreusername/spotnix" target="_blank">Voir le projet complet sur GitHub</a> -->
+        </footer>
+
+    </main>
+
+    <!-- JS pour onglets code -->
+    <script>
+        const tabs = document.querySelectorAll(".tab");
+        const blocks = document.querySelectorAll(".code-block");
+
+        tabs.forEach(tab => {
+            tab.addEventListener("click", () => {
+                tabs.forEach(t => t.classList.remove("active"));
+                blocks.forEach(b => b.classList.remove("active"));
+                tab.classList.add("active");
+                const file = tab.dataset.file;
+                document.getElementById(file).classList.add("active");
+            });
+        });
+    </script>
+
+</body>
+
+</html>

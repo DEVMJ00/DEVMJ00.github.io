@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Autoriser spécifiquement Facebook
+User-agent: facebookexternalhit
+Allow: /
+
+# Autoriser LinkedIn
+User-agent: LinkedInBot
+Allow: /
+
+# Autoriser Twitter/X
+User-agent: Twitterbot
+Allow: /

@@ -1,0 +1,55 @@
+body {
+  padding : 2%;
+}
+
+
+.code-viewer {
+  background: #1e1e1e;
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: monospace;
+  width: 100%;
+}
+
+.code-tabs {
+  display: flex;
+  background: #2c2c2c;
+}
+
+.tab {
+  padding: 10px 16px;
+  border: none;
+  background: transparent;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.tab.active {
+  background: #1e1e1e;
+  color: var(--blueaccent);
+}
+
+.code-content {
+   padding: 2px; 
+}
+
+.code-block {
+  display: none;
+}
+
+.code-block.active {
+  display: block;
+}
+
+.code-block {
+  background: #1e1e1e;
+  border-radius: 10px;
+  padding: 20px;
+  overflow-x: auto;
+  font-size: 0.7rem;
+}
+
+.code-block code {
+  font-family: "Fira Code", monospace;
+  font-size :  0.7rem;
+}
