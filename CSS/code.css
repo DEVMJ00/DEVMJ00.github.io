@@ -43,9 +43,11 @@ body {
 
 .code-block {
   background: #1e1e1e;
-  border-radius: 10px;
+ /* border-radius: 10px;*/
   padding: 20px;
-  overflow-x: auto;
+  /*overflow-x: auto;*/
+  display :  flex;
+  flex-wrap : wrap ; 
   font-size: 0.7rem;
 }
 
