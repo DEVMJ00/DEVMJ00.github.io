@@ -38,6 +38,19 @@ i {
     font-style: italic;
 }
 
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--rainbow);
+    /*filter: blur(15px);*/
+    z-index: -1;
+    animation: rainbowMovement 40s infinite alternate;
+}
+
+
 .badges {
     display: flex;
     flex-wrap: wrap;
@@ -310,12 +323,12 @@ h3 {
 
 .hero {
     height: 96vh;
-    
+   /* 
 	background: var(--rainbow);
-    /*filter: blur(15px);*/
+    /*filter: blur(15px);
     z-index: -1;
     animation: rainbowMovement 40s infinite alternate;
-	
+	*/
 	/*background: url('assets/Background.jpg');*/
     color: white;
     display: flex;
@@ -325,9 +338,6 @@ h3 {
     text-align: center;
 }
 
-.hero > * {
-	z-index: 0;
-}
 
 @keyframes rainbowMovement {
     0% {
