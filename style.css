@@ -179,6 +179,10 @@ button {
 	height: 100%;
 	backface-visibility: hidden;	
     box-sizing: border-box;
+	-webkit-backface-visibility: hidden; /* Safari/Chrome */
+    -moz-backface-visibility: hidden; /* Firefox */
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
 }
 
 .card-back {
