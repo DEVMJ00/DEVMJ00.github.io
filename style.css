@@ -221,7 +221,7 @@ button {
 }
 
 #contact {
-    background-color: var(--primary);
+    background-color: var(--bg);
     margin : auto;
     /* width : fit-content; */
     /* width : 100vw;
@@ -231,15 +231,14 @@ button {
 }
 
 #contact h2 {
-color: white;
+color: var(--primary);
 }
 
-#contact a {
+#contact a,
+#contact i {
 	text-decoration: none;
-	color: white;
+	color: var(--primary);
 }
-
-/* #contact i {color: white;}  */
 
 .diplomes {
 	font-size: 0.9em;
