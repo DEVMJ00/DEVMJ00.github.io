@@ -297,6 +297,8 @@ h3 {
 	font-family: var(--font-title);
 }
 
+
+/**
 .hero {
     height: 96vh;
 	background: url('assets/Background.jpg');
@@ -307,6 +309,89 @@ h3 {
     align-items: center;
     text-align: center;
 }
+**/
+
+.hero {
+    height: 96vh;
+    position: relative;
+    overflow: hidden; /* Important pour contenir l'animation */
+    background: linear-gradient(135deg, #001a33 0%, #0a2a4a 50%, #001a33 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Couche de brume animée */
+.hero::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+        radial-gradient(circle at 20% 30%, rgba(122, 179, 235, 0.15) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(122, 179, 235, 0.10) 0%, transparent 45%),
+        radial-gradient(circle at 40% 80%, rgba(242, 140, 186, 0.08) 0%, transparent 35%),
+        radial-gradient(circle at 60% 20%, rgba(122, 179, 235, 0.12) 0%, transparent 50%);
+    background-size: 50% 50%;
+    animation: drift 20s ease-in-out infinite alternate;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Contenu au-dessus de l'animation */
+.hero > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* Animation de dérive lente */
+@keyframes drift {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    100% {
+        transform: translate(-3%, -3%) rotate(2deg);
+    }
+}
+
+/* Optionnel : Animation plus subtile pour les cercles individuels */
+.hero::after {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+        radial-gradient(circle at 30% 40%, rgba(122, 179, 235, 0.08) 0%, transparent 30%),
+        radial-gradient(circle at 70% 60%, rgba(242, 140, 186, 0.06) 0%, transparent 35%);
+    background-size: 60% 60%;
+    animation: drift-reverse 25s ease-in-out infinite alternate;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes drift-reverse {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+    100% {
+        transform: translate(3%, 3%) rotate(-2deg);
+    }
+}
+
+
+
+
+
+
 
 .hero p {
 	font-style: italic;
