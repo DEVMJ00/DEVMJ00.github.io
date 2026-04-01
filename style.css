@@ -339,12 +339,10 @@ h3 {
 
 .hero {
     height: 96vh;
-    position:  absolute;
-	background-color: var(--rainbow);
+	background: var(--rainbow);
     /*filter: blur(15px);*/
-    z-index: -1;
     animation: rainbowMovement 40s infinite alternate;
-	*/
+	
 	/*background: url('assets/Background.jpg');*/
     color: white;
     display: flex;
