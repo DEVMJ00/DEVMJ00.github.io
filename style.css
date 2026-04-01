@@ -13,6 +13,15 @@
 	 --font-body: 'Nunito Sans', sans-serif;
      --font-title: 'Space Grotesk', sans-serif; 
      --font-code: 'JetBrains Mono', monospace;
+
+    --rainbow: radial-gradient(circle at 10% 10%, rgba(241, 200, 231, 0.5) 0%, rgba(255, 255, 255, 0.4) 30%, rgba(0, 153, 255, 0.3) 50%, rgba(255, 255, 255, 1) 100%),
+    radial-gradient(circle at 40% 40%, rgba(251, 193, 203, 0.69) 0%, rgba(255, 255, 255, 0.5) 40%, rgba(255, 204, 204, 0.2) 70%, rgba(255, 255, 255, 0.8) 100%),
+    radial-gradient(circle at 70% 30%, #fbeb64 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 165, 0, 0.2) 80%, rgba(255, 255, 255, 0.8) 100%),
+    radial-gradient(circle at 20% 70%, #e1d4ff 0%, rgba(255, 255, 255, 0.5) 40%, rgba(204, 255, 255, 0.2) 70%, rgba(255, 255, 255, 0.8) 100%),
+    radial-gradient(circle at 50% 80%, rgba(255, 204, 255, 0.8) 0%, rgba(255, 255, 255, 0.5) 40%, rgba(251, 134, 193, 0.3) 80%, rgba(255, 255, 255, 0.8) 100%),
+    radial-gradient(circle at 80% 60%, rgba(0, 188, 212, 0.76) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(0, 255, 127, 0.2) 90%, rgba(255, 255, 255, 0.8) 100%),
+    radial-gradient(circle at 90% 10%, rgba(202, 108, 241, 0.84) 0%, rgba(255, 255, 255, 0.5) 40%, rgba(255, 82, 82, 0.17) 80%, rgba(255, 255, 255, 0.8) 100%),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.9) 0%, rgba(255, 255, 255, 0.6) 40%, rgba(0, 153, 255, 0.65) 70%);	
 }
 
 * {
@@ -298,24 +307,16 @@ h3 {
 }
 
 
-/**
-.hero {
-    height: 96vh;
-	background: url('assets/Background.jpg');
-    color: white;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-**/
 
 .hero {
     height: 96vh;
-    position: relative;
-    overflow: hidden; /* Important pour contenir l'animation */
-    background: linear-gradient(135deg, #001a33 0%, #0a2a4a 50%, #001a33 100%);
+    
+	background: var(--rainbow);
+    /*filter: blur(15px);*/
+    z-index: -1;
+    animation: rainbowMovement 40s infinite alternate;
+	
+	/*background: url('assets/Background.jpg');*/
     color: white;
     display: flex;
     flex-direction: column;
@@ -324,73 +325,29 @@ h3 {
     text-align: center;
 }
 
-/* Couche de brume animée */
-.hero::before {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: 
-        radial-gradient(circle at 20% 30%, rgba(122, 179, 235, 0.15) 0%, transparent 40%),
-        radial-gradient(circle at 80% 70%, rgba(122, 179, 235, 0.10) 0%, transparent 45%),
-        radial-gradient(circle at 40% 80%, rgba(242, 140, 186, 0.08) 0%, transparent 35%),
-        radial-gradient(circle at 60% 20%, rgba(122, 179, 235, 0.12) 0%, transparent 50%);
-    background-size: 50% 50%;
-    animation: drift 20s ease-in-out infinite alternate;
-    mix-blend-mode: screen;
-    pointer-events: none;
-    z-index: 0;
-}
 
-/* Contenu au-dessus de l'animation */
-.hero > * {
-    position: relative;
-    z-index: 1;
-}
-
-/* Animation de dérive lente */
-@keyframes drift {
+@keyframes rainbowMovement {
     0% {
-        transform: translate(0, 0) rotate(0deg);
+        background-position: 50% 50%;
+        filter: hue-rotate(0deg);
+    }
+    25% {
+        background-position: 75% 25%;
+        filter: hue-rotate(60deg);
+    }
+    50% {
+        background-position: 25% 75%;
+        filter: hue-rotate(120deg);
+    }
+    75% {
+        background-position: 75% 75%;
+        filter: hue-rotate(180deg);
     }
     100% {
-        transform: translate(-3%, -3%) rotate(2deg);
+        background-position: 50% 50%;
+        filter: hue-rotate(360deg);
     }
 }
-
-/* Optionnel : Animation plus subtile pour les cercles individuels */
-.hero::after {
-    content: "";
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: 
-        radial-gradient(circle at 30% 40%, rgba(122, 179, 235, 0.08) 0%, transparent 30%),
-        radial-gradient(circle at 70% 60%, rgba(242, 140, 186, 0.06) 0%, transparent 35%);
-    background-size: 60% 60%;
-    animation: drift-reverse 25s ease-in-out infinite alternate;
-    mix-blend-mode: screen;
-    pointer-events: none;
-    z-index: 0;
-}
-
-@keyframes drift-reverse {
-    0% {
-        transform: translate(0, 0) rotate(0deg);
-    }
-    100% {
-        transform: translate(3%, 3%) rotate(-2deg);
-    }
-}
-
-
-
-
-
 
 
 .hero p {
