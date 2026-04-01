@@ -232,6 +232,7 @@ def recuperer_metadonnees_tmdb(titre_film):
 
         tabs.forEach(tab => {
             tab.addEventListener("click", () => {
+				Prism.highlightAll();
                 tabs.forEach(t => t.classList.remove("active"));
                 blocks.forEach(b => b.classList.remove("active"));
                 tab.classList.add("active");
