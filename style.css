@@ -16,7 +16,7 @@
 
 
 
-	    /* --- FOND HERO SOMBRE ET SUBTIL --- */
+	    /* --- FOND HERO SOMBRE --- */
     --rainbow: 
         radial-gradient(circle at 10% 10%, rgba(122, 179, 235, 0.12) 0%, transparent 40%),
         radial-gradient(circle at 40% 40%, rgba(122, 179, 235, 0.08) 0%, transparent 45%),
@@ -340,7 +340,7 @@ h3 {
 .hero {
     height: 96vh;
     position:  absolute;
-	background: var(--rainbow);
+	background-color: var(--rainbow);
     /*filter: blur(15px);*/
     z-index: -1;
     animation: rainbowMovement 40s infinite alternate;
@@ -354,13 +354,14 @@ h3 {
     text-align: center;
 }
 
+*/*
 .hero img,
 .hero .btn,
 .hero h1,
 .hero p {
 	z-index: 1;
 }
-
+*/
 @keyframes rainbowMovement {
     0% {
         background-position: 50% 50%;
