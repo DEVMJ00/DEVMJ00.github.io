@@ -1,6 +1,14 @@
 body {
+  /* padding : 2%; */
+  margin : 0;
+      overflow-y: scroll;
+    padding-bottom: 60px;
+}
+
+header {
   padding : 2%;
 }
+
 
 
 .code-viewer {
@@ -8,7 +16,7 @@ body {
   border-radius: 12px;
   overflow: hidden;
   font-family: monospace;
-  width: 100%;
+  width: 100vw;
 }
 
 .code-tabs {
@@ -30,7 +38,7 @@ body {
 }
 
 .code-content {
-   padding: 2px; 
+  width: 100%;
 }
 
 .code-block {
@@ -39,6 +47,7 @@ body {
 
 .code-block.active {
   display: block;
+  margin-bottom: -10px;
 }
 
 .code-block {
@@ -49,9 +58,21 @@ body {
   white-space: pre-wrap;
   overflow-wrap: break-word;
   font-size: 0.7rem;
+ 
 }
 
 .code-block code {
   font-family: "Fira Code", monospace;
  /* font-size :  0.7rem;*/
+}
+
+.video-wrapper {
+    max-width: 800px;   
+    margin: 0 auto;     
+}
+
+.project-video {
+    width: 100%;
+    height: auto;       
+    display: block;     
 }
