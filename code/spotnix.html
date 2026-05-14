@@ -12,7 +12,8 @@
     <!-- Prism.js pour coloration syntaxique -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-
+    <!-- ajout du composant pour python : -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
     <!-- CSS pour pages de code -->
     <link rel="stylesheet" href="../CSS/code.css">
 
@@ -25,7 +26,33 @@
 
         <h1>Spotnix</h1>
         <h2>Serveur multimédia local en Python/Django.</h2>
-		<h3>Page de démonstration.</h3>
+        <h3>Explication du projet</h3>
+        <p class="formatted-text">
+            <strong>Spotnix</strong> est un serveur multimédia personnel conçu pour centraliser et diffuser localement
+            une bibliothèque de films et de séries, offrant une expérience de navigation immersive similaire aux grandes
+            plateformes de streaming. Développé en Python/Django, ce projet va au-delà d'un simple lecteur : il agit
+            comme un agrégateur intelligent de métadonnées, et permet de télécharger le film choisit au format
+            <strong>*.iso</strong>.
+
+            L'application interroge en temps réel l'<strong>API TMDb</strong> pour enrichir automatiquement chaque titre
+            avec ses jaquettes, synopsis, genres et années de sortie, transformant un simple répertoire de fichiers en
+            une interface visuelle riche et organisée. J'ai conçu une architecture modulaire permettant une
+            authentification sécurisée des utilisateurs, le tout dans une interface responsive et esthétique.
+
+            <strong>Défis techniques : </strong>
+            <strong>Intégration API : </strong> Gestion asynchrone des requêtes vers TMDb pour récupérer et mettre en
+            cache les métadonnées sans ralentir l'interface.
+            <strong>Expérience Utilisateur : </strong> Création d'une interface "Netflix-like" avec un design sombre,
+            des transitions fluides et une adaptation parfaite aux écrans mobiles. L'ajout d'un nouveau film dans le
+            dossier est automatiquement ajouté à la liste des films disponibles.
+            <strong>Architecture : </strong> Conception d'un backend Django robuste capable de scanner, indexer et
+            servir des fichiers multimédias locaux via le réseau.
+            <strong>Résultat : </strong> Une solution autonome hébergée sur Raspberry Pi 5, permettant de transformer
+            n'importe quel ordinateur ou NAS en un centre de divertissement personnel, sécurisé et entièrement
+            personnalisable, sans dépendre des services cloud tiers
+        </p>
+
+
 
     </header>
 
@@ -50,13 +77,92 @@
 
             <div class="code-content">
                 <!-- Python -->
-                <pre class="code-block active" id="python"><code class="language-py">
+                <pre class="code-block active" id="python"><code class="language-python">
 
+import os
+from django.conf import settings
+from django.contrib import messages
+from django.core.cache import cache
+from django.http import HttpResponse
+from django.shortcuts import render
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import cache_control
+import tmdbsimple as tmdb 
+from django.shortcuts import render, get_object_or_404
+from medias.cache_json import charger_cache, sauvegarder_cache
+from django.http import JsonResponse
+
+
+#@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+@login_required
+def affichage_des_videos(request):
+    """
+    Affiche la liste détaillée des vidéos présentes dans le dossier défini.
+    Utilise un cache JSON pour éviter les appels répétitifs à TMDb.
+    """
+
+    # 1. Charger le cache des métadonnées
+    films = charger_cache() or {}
+    
+    # 2. Définir le chemin vers le dossier contenant les vidéos
+    # chemin relatif: # dossier_vers_videos = os.path.join(settings.BASE_DIR, 'medias_data/videos')
+    ou_sont_mes_videos = settings.CHEMIN_VIDEOS
+    extensions_des_videos = ('.mp4', '.mkv', '.avi', '.mov', '.wmv', '.flv', '.webm', '.mpeg', '.iso', '.m2ts')
+    
+    # Initialiser une liste vide pour stocker les objets vidéo
+    liste_des_videos_disponibles = []
+    
+    # Vérifier que le dossier existe
+    if os.path.exists(ou_sont_mes_videos):
+        # Parcourir chaque élément du dossier
+        for fichier in os.listdir(ou_sont_mes_videos):
+            # Ne garder que les fichiers MKV (insensible à la casse)
+            if fichier.lower().endswith(extensions_des_videos):
+                chemin_complet = os.path.join(ou_sont_mes_videos, fichier)
+                titre_film = os.path.splitext(fichier)[0]
+            
+                # 3. Récupérer les métadonnées depuis le cache ou TMDb
+                metadonnees = films.get(titre_film)
+                
+                if not metadonnees:
+                    metadonnees = recuperer_metadonnees_tmdb(titre_film)
+                    print(f"\033[91mLes métadonnées ont été récupérées depuis TMDB !\033[0m")
+                    if metadonnees:
+                         films[titre_film] = metadonnees
+                    else:
+                        print(f"\033[91mTitre du film manquant : \033[0m {titre_film}")
+                        continue  # ne pas ajouter ce film
+                
+                liste_des_videos_disponibles.append({
+                    'nom': titre_film,
+                    'chemin_complet': chemin_complet,
+                    'extension': os.path.splitext(fichier)[1].lower(),
+                    'id_tmdb': metadonnees['id_tmdb'],
+                    'affiche': metadonnees['affiche'],
+                    'metadonnees': metadonnees
+                })
+                    
+    # 4. Sauvegarder le cache mis à jour
+    sauvegarder_cache(films) 
+    print(f"\033[92mSauvegarde du cache !\033[0m")            
+
+    # 5. Préparer les données pour le template
+    contexte = {
+        'videos': liste_des_videos_disponibles,
+        'films' : films
+    }
+
+    # 6. Rendre le template
+    return render(request, "medias/videos.html", contexte)
+
+def refresh_cache(request):
+    films = affichage_des_videos()
+    sauvegarder_cache(films)
+    return JsonResponse({"status": "ok", "message": "Cache mis à jour"})
 
 def recuperer_metadonnees_tmdb(titre_film):
     # clé API TMDb
     tmdb.API_KEY = settings.TMDB_API_KEY
-    print(f"clé: ", tmdb.API_KEY)
     """
     Recherche un film par titre sur TMDb et retourne ses métadonnées principales.
     
@@ -83,61 +189,207 @@ def recuperer_metadonnees_tmdb(titre_film):
 
     return {
         'titre': details.get('title'),
-        #'annee': details.get('release_date', '')[:4],
         'affiche': f"https://image.tmdb.org/t/p/w500{details.get('poster_path')}" if details.get('poster_path') else None,
-        #'synopsis': details.get('overview'),
-        #'genre': genres,
-        #'duree': duree,
         'id_tmdb': details.get('id')  # ID TMDb pour requêtes future
     }
 
-	 
+def detail_film(request, id_tmdb):
+    import tmdbsimple as tmdb
+    from django.conf import settings
+    from django.http import HttpResponse
+
+    # 1. On récupère le chemin réel envoyé dans l'URL
+    chemin_video = request.GET.get('chemin')  
+    if not chemin_video:
+        return HttpResponse("Chemin vidéo manquant.", status=400)
+
+    # 2. On fabrique une URL publique à partir du nom de fichier
+    nom_fichier = os.path.basename(chemin_video)
+    chemin_video_url = f"{settings.MEDIA_URL}{nom_fichier}"
+    #2.1 On récupère l'extension du fichier vidéo
+    _, extension = os.path.splitext(nom_fichier)
+    extension = extension.upper().lstrip('.')
+
+    # 3. Définir la clé API TMDb
+    tmdb.API_KEY = settings.TMDB_API_KEY
+
+    # 4. On récupère les infos TMDb
+    movie = tmdb.Movies(id_tmdb)
+    details = movie.info(language='fr-FR')
+    genres = [genre['name'] for genre in details.get('genres', [])]
+    duree = details.get('runtime')
+    taille_mo = round(os.path.getsize(chemin_video) / (1024 * 1024), 2)
+    synopsis = details.get('overview')
+    
+    # 5. Construire l’URL complète vidéo (avec domaine et port)
+    domaine = request.get_host()  # ex: '192.168.1.98:8000'
+    url_video_complete = f"http://{domaine}{chemin_video_url}"
+
+    # 6. Préparer le contexte pour le template
+    contexte = {
+        'titre': details.get('title'),
+        'annee': details.get('release_date', '')[:4],
+        'affiche': f"https://image.tmdb.org/t/p/w500{details.get('poster_path')}" if details.get('poster_path') else None,
+        'backdrop': f"https://image.tmdb.org/t/p/w1280{details.get('backdrop_path')}" if details.get('backdrop_path') else None,
+        'synopsis': synopsis,
+        'genres': genres,
+        'duree': duree,
+        'taille_mo': taille_mo,
+        'chemin_video': chemin_video_url,
+        'url_video_complete': url_video_complete,
+        'extension': extension,
+    }
+    return render(request, 'medias/detail_film.html', contexte)
+
  </code>  
  </pre>
 
                 <!-- HTML -->
                 <pre class="code-block" id="html">
-					<code class="language-html">
-<body>
-<header>
-    {% if not hide_footer_nav %}
-        <nav>
-            {% include 'spotnix/fragments/navbar.html' %}
-        </nav>
-    {% endif %}
-</header>
-{#<main class="container">#}
-<main>
 
-    <div class="background"></div>
-    <!--ZONE D'AFFICHAGE D'UN MESSAGE-->
-    {% if messages %}
-        <div class="alert-container">
-            {% for text in messages %}
-                <div class="alert alert-{{ text.tags }}">
-                    {{ text }}
-                </div>
-            {% endfor %}
-        </div>
-    {% endif %}
-    {% block content %}
-    {% endblock content %}
-</main>
-{% if not hide_footer_nav %}
-    <footer>
-        {% include 'spotnix/fragments/footer.html' %}
-    </footer>
+            <p style="color : white; font-weight: 800;";>⬇️ &lt;/&gt; detail_films.html : ⬇️</p>
+
+
+					<code class="language-html">
+{% extends "spotnix/fragments/base.html" %}
+
+{% block content %}
+
+{% if backdrop %}
+&lt;div class="film-backdrop"&gt;
+  &lt;div class="backdrop-image" style="background-image: url('{{ backdrop }}');"&gt;&lt;/div&gt;
+    &lt;div class="film-content"&gt;
+      &lt;h1 class="logo" style="background-color : none ;"&gt;{{ titre }} &lt;/h1&gt;
+      
+        {% if affiche %}
+        &lt;!-- &lt;img src="{{ affiche }}" alt="Affiche de {{ titre }}" class="poster"&gt; --&gt;
+        {% endif %}
+      
+      
+      &lt;p&gt;&lt;strong&gt;Année :&lt;/strong&gt; {{ annee }}&lt;/p&gt;
+      &lt;p&gt;&lt;strong&gt;Genres :&lt;/strong&gt; {{ genres|join:", " }}&lt;/p&gt;
+      &lt;p&gt;&lt;strong&gt;Durée :&lt;/strong&gt; {{ duree }} minutes&lt;/p&gt;
+      &lt;p&gt;&lt;strong&gt;Taille :&lt;/strong&gt; {{ taille_mo }} Mo&lt;/p&gt;
+      &lt;p&gt;&lt;strong&gt;Format fichier : &lt;/strong&gt; {{extension}} &lt;/p&gt;
+      &lt;p style = "text-align : justify ;"&gt;&lt;strong&gt;Synopsis :&lt;/strong&gt; {{ synopsis }}&lt;/p&gt;
+        &lt;div class="align_buttons"&gt;
+          
+          &lt;a href="{{ url_video_complete }}" target="_blank" rel="noopener noreferrer" class="btn_vert"&gt; Télécharger &lt;/a&gt;
+          
+
+           &lt;button id="btnLecture" class="btn_rouge"&gt; ▶ Lecture &lt;/button&gt;
+            &lt;div id="lecteurVideo" class="video-player" style="display:none;"&gt;
+                &lt;video controls autoplay="true" muted="false" width="100%" preload="metadata"&gt;
+                  &lt;source src="{{ chemin_video }}" type="video/mp4"&gt;
+                  Votre navigateur ne supporte pas la lecture vidéo intégrée.
+                &lt;/video&gt;
+            &lt;/div&gt; 
+            
+            &lt;div&gt;&lt;a class="btn_gris" href="{% url 'videos' %}"&gt;Retour &lt;/a&gt;&lt;/div&gt; 
+
+        &lt;/div&gt;
+         &lt;div id="lecteurVideo" class="video-player" style="display:none;"&gt;
+            &lt;video
+              id="maVideo"
+              class="video-js vjs-big-play-centered"
+              controls
+              preload="metadata"
+              width="100%"
+              height="auto"
+              data-setup="{}"
+            &gt;
+              &lt;source src="{{ chemin_video }}" type="video/mp4" /&gt;
+              &lt;!-- Exemple de sous-titres --&gt;
+              &lt;!--
+              &lt;track kind="subtitles" src="/static/subs/fr.vtt" srclang="fr" label="Français" default&gt;
+              &lt;track kind="subtitles" src="/static/subs/en.vtt" srclang="en"  label="English"&gt;
+              --&gt;
+
+              Votre navigateur ne supporte pas la lecture vidéo intégrée.
+            &lt;/video&gt;
+         &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
 {% endif %}
 
-<script>
-    const username = "{{ username }}";
-</script>
+&lt;script&gt;
+    document.addEventListener("DOMContentLoaded", function () {
+        const btn = document.getElementById("btnLecture");
+        const lecteur = document.getElementById("lecteurVideo");
 
-<script src="{% static 'js/messages.js' %}"></script>
-{% block javascript %}
-{% endblock javascript %}
-</body>
-            </code></pre>
+        if (btn) {
+            btn.addEventListener("click", function () {
+                lecteur.style.display = "flex";
+                btn.style.display = "none";
+            });
+        }
+    });
+&lt;/script&gt;
+
+{% endblock %}
+</code>
+
+
+ <p style="color : white; font-weight: 800;";>⬇️ &lt;/&gt; videos.html : ⬇️</p>
+
+
+					<code class="language-html">
+
+    {% extends 'spotnix/fragments/base.html' %}
+
+{% block title %} Vidéos {% endblock title %}
+
+{% block content %}
+&lt;h1 class="logo"&gt;SPOTNIX&lt;/h1&gt;
+
+  &lt;!-- //TODO : ajouter le nombre de films disponibles --&gt;
+    {% if videos %}
+        &lt;div class="videos-container"&gt;
+      {% for video in videos %}
+        &lt;div class="video-card" &gt;
+          &lt;a href="{% url 'detail_film' video.id_tmdb %}?chemin={{ video.chemin_complet|urlencode }}"&gt;
+          {% if video.metadonnees %}
+            &lt;div class="metadonnees"&gt;
+              {% if video.metadonnees.affiche %}
+                  &lt;img src="{{ video.affiche }}" alt="Affiche de {{ video.nom }}" class="poster"&gt;
+                {% else %}
+                  &lt;p&gt;[Pas d'affiche disponible]&lt;/p&gt;
+              {% endif %}
+            &lt;/a&gt;
+          &lt;/div&gt;
+          &lt;p class="titre_film"&gt;{{ video.metadonnees.titre }}&lt;/p&gt; 
+          {% else %}
+           &lt;p class="titre_film"&gt;{{ video.nom }}&lt;/p&gt;
+            &lt;p&gt;Aucune métadonnée disponible pour ce film.&lt;/p&gt;
+          {% endif %}
+        &lt;/div&gt;
+      {% endfor %}
+    &lt;/div&gt;
+  {% else %}
+    &lt;p&gt;Aucune vidéo trouvée dans le dossier.&lt;/p&gt;
+  {% endif %}
+
+
+{% if erreur %}
+&lt;p style="color:red;"&gt;{{ erreur }}&lt;/p&gt;
+{% endif %}
+
+
+&lt;button id="refresh-btn"&gt; Rafraîchir les films&lt;/button&gt;
+
+&lt;script&gt;
+    document.getElementById("refresh-btn").addEventListener("click", () =&gt; {
+        fetch("{% url 'refresh_cache' %}")
+            .then(response =&gt; response.json())
+            .then(data =&gt; {
+                alert(data.message);
+                location.reload(); // recharge la page pour afficher le nouveau cache
+            });
+    });
+&lt;/script&gt;
+{% endblock content %}
+</code>
+</pre>
 
                 <!-- CSS -->
                 <pre class="code-block" id="css"><code class="language-css">
@@ -197,6 +449,110 @@ def recuperer_metadonnees_tmdb(titre_film):
 }
 /*#########################################################################*/
 
+
+
+.videos-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.video-card {
+  padding: 15px;
+  width: 300px;
+  /*box-shadow: 2px 2px 6px rgba(0,0,0,0.1);*/
+}
+
+.titre_film {
+  justify-self: flex-start;  
+  color: lightslategray;
+}
+
+ .poster {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+} 
+
+
+.videos-container, .video-card, .metadonnees {
+    color: ghostwhite;
+}
+
+.film-backdrop {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    padding: 2rem;
+    color: white;
+}
+
+.backdrop-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(0.5) blur(1.5px);
+  z-index: 0;
+}
+
+.film-content {
+    display : flex; 
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width : 100%;
+    height : 85vh;
+    position: relative; 
+    z-index: 1;
+}
+
+.video-player {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    z-index : 1; 
+}
+
+.video-player video {
+    width: 100%;
+    max-width: 900px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    background: black;
+    z-index : 1; 
+}
+
+.bouton-lecture {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    font-size: 1.2em;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #ff4444;
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    z-index : 1; 
+}
+
+.bouton-lecture :hover {
+    background: #cc0000;
+}
+
+
+@media screen and (max-width : 768px) {
+   .video-card {
+        max-width: 170px;
+        width: 170px;
+   } 
+}
+
             </code></pre>
 
                 <!-- JS -->
@@ -234,7 +590,7 @@ def recuperer_metadonnees_tmdb(titre_film):
 
         tabs.forEach(tab => {
             tab.addEventListener("click", () => {
-				Prism.highlightAll();
+                Prism.highlightAll();
                 tabs.forEach(t => t.classList.remove("active"));
                 blocks.forEach(b => b.classList.remove("active"));
                 tab.classList.add("active");
