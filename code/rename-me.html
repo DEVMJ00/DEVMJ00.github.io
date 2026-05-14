@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -13,7 +12,8 @@
     <!-- Prism.js pour coloration syntaxique -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
-
+    <!-- ajout composant pour le langage powershell : -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-powershell.min.js"></script>
     <!-- CSS pour pages de code -->
     <link rel="stylesheet" href="../CSS/code.css">
 
@@ -25,29 +25,56 @@
     <header>
 
         <h1>Rename-me</h1>
-        <h2>Outil de renommage automatique de fichiers au format *.msg. Page de démonstration et extrait de code.</h2>
+        <h2>Outil de renommage automatique de fichiers au format *.msg.</h2>
+        <h3>Explication du projet :</h3>
+
+        <p class="formatted-text">
+<strong>Rename-me</strong> Rename-me est un outil d'automatisation desktop développé en <strong>PowerShell</strong> avec une interface graphique native (Windows Forms), conçu pour résoudre un problème critique d'archivage : la gestion de centaines de fichiers .msg d'Outlook soumis à des contraintes strictes (longueur limitée, interdiction de caractères spéciaux, unicité obligatoire).
+
+Là où la saisie manuelle était lente et source d'erreurs, cette application génère instantanément des noms de fichiers conformes au format AAAAMMJJ_Catégorie.msg. Au-delà de la logique de renommage, le projet met en avant une maîtrise avancée de l'interface utilisateur : j'ai créé un rendu graphique personnalisé pour une liste déroulante complexe (avec titres hiérarchisés et styles distincts) et intégré un système de feedback visuel en temps réel.
+
+Compilé en exécutable autonome (.exe), cet outil transforme une tâche administrative répétitive en un flux de travail fluide, sécurisé et immédiat.
+
+</p>
 
     </header>
 
     <main class="project">
 
         <!-- Section aperçu visuel -->
-        <section class="project-demo">
+        <!-- <section class="project-demo">
             <img src="../assets/rename-me.png" alt="Capture d'écran Rename-me" class="project-img">
-        </section>
+        </section> -->
+
+<section class="project-demo">
+    <div class="video-wrapper">
+    <video 
+        class="project-video" 
+        controls 
+        preload="metadata" 
+        poster="../assets/rename-me.png"
+        aria-label="Démo de Rename-me"
+        autoplay
+        muted
+        loop
+        playsinline>
+        <source src="../assets/rename-me.mp4" type="video/mp4">
+    </video>
+</div>
+
+</section>
 
         <!-- Section code -->
         <section class="project-code">
-            <h3>Extrait de code</h3>
+            <h3>Affichage du code :</h3>
 
             <!-- Onglets pour fichiers -->
             <div class="code-tabs">
-                <button class="tab active" data-file="powershell>Powershell</button>
+                <button class="tab active" data-file="powershell">Powershell</button>
             </div>
 
             <div class="code-content">
-                <!-- Python -->
-                <pre class="code-block active" id="powershell"><code class="language-mscript">
+                <pre class="code-block active" id="powershell"><code class="language-powershell">
 
 
 # -------------------------------------------------
