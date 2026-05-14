@@ -311,6 +311,15 @@ button {
     flex-direction: column;
 }
 
+
+.disponibilite {
+    margin-top: 5px;
+    font-size: 0.9rem;
+    text-align: center;
+    color : black;
+}
+
+
 footer {
     display: flex;
     justify-content: center;
@@ -371,7 +380,7 @@ h3 {
 
     background: var(--rainbow);
     filter: blur(60px);
-    animation: rainbowMovement 12s ease-in-out infinite alternate;
+    animation: rainbowMovement 8s ease-in-out infinite alternate;
     /* animation: rainbowColorChange 12s ease-in-out infinite alternate; */
     z-index: 0;
     pointer-events: none;
@@ -428,12 +437,12 @@ h3 {
 
 
 .hero p {
-    font-style: italic;
-    font-size: 0.9rem;
     color: white;
+    margin-top : -10px;
+    margin-bottom: 10px; 
 }
 
-.hero-slogan {
+/* .hero-slogan {
     display: flex;
     color: white;
     line-height: 2em;
@@ -451,7 +460,48 @@ h3 {
     color: var(--blueaccent);
     padding-right: 8px;
     animation: slogan 4s infinite
+} */
+
+
+.hero-slogan {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    line-height: 2em;
+    font-weight: bold;
+    margin-top : 2%;
 }
+
+.hero-slogan span {
+    font-size: 25px;
+}
+
+.hero-slogan span::before {
+    content: "Analyser";
+    color: var(--blueaccent);
+    animation: wordCycle 6s infinite;
+}
+
+@keyframes wordCycle {
+    0%   { opacity: 0; content: "Analyser"; }
+    16%   { opacity: 1; content: "Analyser"; }
+    33%  {opacity: 0; content: "Analyser";}
+    
+    34%  {opacity: 0; content: "Concevoir";}
+    50%  { opacity: 1; content: "Concevoir"; }
+    63%  { opacity: 0; content : "Concevoir";}
+
+    64%  { opacity: 0; content: "Développer"; }
+    75%  { opacity: 1; content: "Développer"; }
+    100% { opacity: 0; content: "Développer"; }
+}
+
+
+
+
+
+
 
 html {
     scroll-behavior: smooth;
@@ -555,7 +605,7 @@ p {
     height: auto;
     border-radius: 30%;
     object-fit: cover;
-    margin-bottom: 1.5rem;
+    /* margin-bottom: 1.1rem; */
     /*box-shadow: 0 6px 20px rgba(0,0,0,0.15);*/
 }
 
@@ -766,3 +816,11 @@ p {
         max-width: 80px;
     }
 }
+
+
+
+
+
+
+
+
