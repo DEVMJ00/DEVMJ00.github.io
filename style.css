@@ -314,6 +314,7 @@ button {
 
 .disponibilite {
     margin-top: 5px;
+    margin-bottom: 1%; 
     font-size: 0.9rem;
     text-align: center;
     color : black;
