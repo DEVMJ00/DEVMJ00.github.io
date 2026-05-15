@@ -179,7 +179,7 @@ button {
 .card {
     position: relative;
     perspective: 1000px;
-    height: 650px;
+    height: 750px;
 }
 
 .card,
@@ -193,7 +193,6 @@ button {
 }
 
 
-.card:hover,
 .stack-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
@@ -261,7 +260,7 @@ button {
     height: auto;
     max-height: 300px;
     border-radius: 15px;
-    margin-bottom: 8%;
+    margin-bottom: 6%;
     margin-top: 6%;
 }
 
@@ -346,12 +345,12 @@ footer a {
 }
 
 h2 {
-    display: block;
+    /* display: block; */
     max-width: 1200px;
     width: 100%;
     color: var(--primary);
     text-align: left;
-    margin-top: 10px;
+    /* margin-top: 5px; */
     font-family: var(--font-title);
 }
 
@@ -619,9 +618,22 @@ p {
     margin: auto;
     padding: 1%;
     column-gap: 30px;
-    row-gap: 30px;
+    row-gap: 10px;
     align-items: stretch;
 }
+
+#projects {
+    row-gap: 30px;
+}
+
+#projects > h2 { 
+    margin-bottom: -20px;
+}
+
+#profil > h2 { 
+    margin-top: 20px;
+}
+
 
 .stack-card {
     flex: 1 1 200px;
