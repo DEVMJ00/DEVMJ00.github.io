@@ -766,10 +766,15 @@ p {
 
 @media (orientation: landscape) and (max-height: 500px) {
     .photo-profil {
-        width: 80px;
+        width: auto;
         height: 80px;
-        object-fit: cover;
     }
+    
+    .hero-slogan {
+        font-size :0.7rem;
+    }
+
+    
 }
 
 /************** END MEDIA QUERIES   ************************/
