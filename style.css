@@ -754,16 +754,21 @@ p {
     }
 }
 
-@media
-
-/*(hover: none) and*/
-(pointer: coarse) {
+@media /*(hover: none) and*/ (pointer: coarse) {
 
     .btn_code:active,
     #topButton:active,
     #topButton:active * {
         transform: scale(0.90);
         transition: transform 0.1s ease;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 500px) {
+    .photo-profil {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
     }
 }
 
@@ -827,12 +832,13 @@ p {
     transform: scale(0.97);
 }
 
+/*
 @media (max-width: 768px) and (orientation: landscape) {
     .photo-profil {
         max-width: 80px;
     }
 }
-
+*/
 
 
 
