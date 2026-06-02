@@ -542,7 +542,7 @@ nav {
     /*background-color: rgba(202, 202, 202, 0.7);*/
     margin-top: -10px;
     gap: 2px;
-    z-index: 1;
+    z-index: 9999;
     width: 100vw;
 }
 
