@@ -542,7 +542,7 @@ nav {
     /*background-color: rgba(202, 202, 202, 0.7);*/
     margin-top: -10px;
     gap: 2px;
-    z-index: 9999;
+    z-index: 1;
     width: 100vw;
 }
 
@@ -751,6 +751,7 @@ p {
 
     .nav-links.active {
         display: flex;
+        z-index: 9999;
     }
 }
 
