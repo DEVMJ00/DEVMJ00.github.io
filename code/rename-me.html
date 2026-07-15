@@ -137,7 +137,7 @@ $comboOptions.DropDownStyle = 'DropDownList'
 $comboOptions.DropDownHeight = 300
 $form.Controls.Add($comboOptions)
 
-# ----- Ajout des items (titres + options) -----
+# ----- Ajout des items (titres + vraies options) -----
 $comboOptions.Items.AddRange(@(
     "--- Relances ---",
     "1ère relance",
@@ -175,7 +175,13 @@ $comboOptions.Items.AddRange(@(
 	"Intervention refusée",
     "Intervention réalisée",
     "Rapport d'intervention",
-
+	
+	"---SYNDIC---",
+	"Demande de prise en charge syndic",
+	"Réponse syndic",
+	"Rapport intervention syndic",
+	
+	
 	"---ASSURANCES---",
 	"Rapport d'Expertise",
 	"Constat Amiable Dégât Des Eaux",
@@ -219,7 +225,7 @@ $comboOptions.add_DrawItem({
     if ($e.Index -lt 0) { return }
 
     $g    = $e.Graphics
-    $rect = $e.Bounds                 # Rectangle contenant la zone à colorer
+    $rect = $e.Bounds                 # Rectangle contenant la zone à peindre
     $info = $itemsInfo[$e.Index]      # Tableau d’informations (Text / IsTitle)
 
     # -------- Couleur de fond (highlight ou normal) --------
@@ -252,7 +258,7 @@ $comboOptions.add_DrawItem({
     # -------- Dessin du texte (utilise l’overload qui accepte RectangleF) --------
     $g.DrawString($info.Text, $font, $brush, $textRectF)
 
-    # -------- Ligne de séparation sous chaque titre --------
+    # -------- Ligne de séparation sous chaque titre (optionnel) --------
     if ($info.IsTitle) {
         $pen = [System.Drawing.Pen]::new([System.Drawing.Color]::LightGray)
         $y   = $rect.Bottom - 1
@@ -302,6 +308,13 @@ $labelStatus.AutoSize      = $false               # on contrôle la taille nous�
 $labelStatus.Width         = $form.ClientSize.Width - 20   # marge de 10 px à gauche & droite
 $labelStatus.Height        = 60                  
 
+#$labelStatus.Location     = New-Object System.Drawing.Point(10, $form.ClientSize.Height - $labelStatus.Height - 10)
+#$labelStatus.Padding       = New-Object System.Windows.Forms.Padding(8)
+#$labelStatus.BorderStyle   = [System.Windows.Forms.BorderStyle]::None
+#$labelStatus.TextAlign     = [System.Drawing.ContentAlignment]::MiddleLeft
+#$labelStatus.AutoEllipsis  = $true                # ajoute "…" si le texte dépasse vraiment
+#$labelStatus.MaximumSize   = New-Object System.Drawing.Size($form.ClientSize.Width - 20,0) # largeur maximale, hauteur illimitée
+#$labelStatus.WordWrap      = $true                # autorise le retour à la ligne automatique
 $form.Controls.Add($labelStatus)
 
 # -------------------------------------------------
@@ -312,6 +325,7 @@ $labelFooter.Text = "Made with ❤ by DEVMJ"
 $labelFooter.ForeColor = [System.Drawing.Color]::FromArgb(50, 179, 179, 179)  
 $labelFooter.Font = New-Object System.Drawing.Font("Segoe UI Emoji", 8, [System.Drawing.FontStyle]::Regular)
 $labelFooter.AutoSize = $true
+#$labelFooter.Location = New-Object System.Drawing.Point(300,492)
 # Centrage horizontal et vertical
 $labelFooter.Location = New-Object System.Drawing.Point(
     (($Form.ClientSize.Width - $labelFooter.Width) / 2),
@@ -385,6 +399,9 @@ $mapping = @{
 	"Intervention refusée"                 = "Intervention_refusee"
     "Intervention réalisée"                = "Confirmation_intervention_terminee"
     "Rapport d'intervention"               = "Rapport_d_intervention"
+	"Demande de prise en charge syndic"    = "Demande_prise_en_charge_syndic" 
+	"Réponse syndic"					   = "Reponse_du_syndic"
+	"Rapport intervention syndic"		   = "Rapport_intervention_syndic"
 	"Raccordement Fibre Optique"           = "Information_sur_raccordement_fibre"
 	"Constat Amiable Dégât Des Eaux"	   = "Constat DDE"
 	"Rapport d'Expertise"                  = "Rapport_d_expertise" 
@@ -440,6 +457,7 @@ $comboOptions.SelectedIndex = 0
 # Lancement de l'interface
 # -------------------------------------------------
 [void]$form.ShowDialog()
+
 
 	 
  </code>  
