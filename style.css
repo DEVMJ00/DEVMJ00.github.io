@@ -250,9 +250,8 @@ button {
 .card-back p {
     font-size: 0.9rem;
 }
-.cv {
-  background-color: #7ab3eb;
-}
+
+
 .project-img {
     width: 100%;
     object-fit: contain;
@@ -281,6 +280,10 @@ button {
 #contact i {
     text-decoration: none;
     color: var(--primary);
+}
+
+.cv_color {
+  background-color: #7ab3eb;
 }
 
 .diplomes {
@@ -609,6 +612,10 @@ p {
     object-fit: cover;
     /* margin-bottom: 1.1rem; */
     /*box-shadow: 0 6px 20px rgba(0,0,0,0.15);*/
+}
+
+.portfolio_color {
+	background-color: #F28CBA;
 }
 
 .section {
