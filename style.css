@@ -847,8 +847,107 @@ p {
 */
 
 
+.intro {
+
+    text-align:center;
+
+    max-width:700px;
+
+    margin:auto;
+
+}
+
+.timeline {
+    margin-top:60px;
+    border-left:4px solid var(--secondary-color);
+    padding-left:30px;
+}
+
+.timeline-item {
+
+    margin-bottom:50px;
+
+}
 
 
 
+.timeline-date {
+
+    font-weight:bold;
+
+    color:var(--secondary-color);
+
+    margin-bottom:10px;
+
+}
 
 
+
+.timeline-card {
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.1);
+
+}
+
+.project-preview {
+
+    text-align:center;
+
+    padding:40px;
+
+    background:white;
+
+    border-radius:20px;
+
+}
+
+
+.logo {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	font-family: "Audiowide", sans-serif;
+	letter-spacing: 3%;
+	font-size: 7em;
+	
+	animation:
+	hologram 5s infinite;
+
+		
+
+}
+
+.chevron {
+	-webkit-text-stroke: 0.2px white;
+	color: var(--pinkaccent);
+	font-weight: 600;
+	font-size: 10rem;
+}
+
+.ev {
+	color: white;
+}
+
+.mj {
+	color: var(--pinkaccent);
+}
+@keyframes hologram {
+
+	0%,100% {
+		opacity:1;
+		filter:
+		drop-shadow(0 0 5px var(--couleur-secondaire));
+	}
+
+	50% {
+		opacity:.85;
+		filter:
+		drop-shadow(0 0 20px var(--couleur-secondaire));
+	}
+}
