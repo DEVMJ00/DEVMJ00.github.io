@@ -43,9 +43,6 @@ i {
     color: white;
 }
 
-#profil p {
-    font-style: italic;
-}
 
 
 .badges {
@@ -633,7 +630,7 @@ p {
     margin-bottom: -20px;
 }
 
-#profil > h2 { 
+#experiences > h2 { 
     margin-top: 20px;
 }
 
